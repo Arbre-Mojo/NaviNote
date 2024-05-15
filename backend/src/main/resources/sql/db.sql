@@ -51,3 +51,8 @@ CREATE TABLE Course_List (
     FOREIGN KEY (professor_id) REFERENCES Professor(professor_id),
     FOREIGN KEY (course_id) REFERENCES Course(course_id)
 )
+
+ALTER TABLE Student add token varchar(255);
+ALTER TABLE Administrator add token varchar(255);
+ALTER TABLE Professor add token varchar(255);
+exec sp_rename 'dbo.administrator', 'Admin'
