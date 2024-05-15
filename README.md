@@ -1,2 +1,1 @@
 # NaviNote
-inshallah ca marche
