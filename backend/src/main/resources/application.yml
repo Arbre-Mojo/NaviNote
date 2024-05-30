@@ -1,0 +1,41 @@
+server:
+  port: 9001
+  tomcat:
+    accesslog:
+      enabled: true
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      indent-output: false
+
+---
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5439/navi_note_db
+    username: navi_note
+    password: navi_note
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_jdbc_metadata_defaults: false
+
+
+socialnetwork:
+  self:
+    url: localhost:9001
+
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 587
+spring.mail.username: terasyncbot@gmail.com
+spring.mail.password: gyjl cyco ujoy hick
+
+#lol xd don't worry about it
+spring.servlet.multipart.max-file-size: 100000000MB
+spring.servlet.multipart.max-request-size: 100000000MB

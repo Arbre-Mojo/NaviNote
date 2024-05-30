@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "admin")
 @Setter
 @Getter
 @ToString
@@ -24,7 +25,7 @@ public class Admin extends User {
     private String password;
     @Column(name = "token")
     private String token;
-    @Column(name = "pfpImgPath")
+    @Column(name = "pfp_img_path")
     private String pfpImgPath;
 
     @Override

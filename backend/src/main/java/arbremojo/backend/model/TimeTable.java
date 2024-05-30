@@ -3,7 +3,8 @@ package arbremojo.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name="Time_Table")
+@Entity
+@Table(name = "time_table")
 @Setter
 @Getter
 @ToString

@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    ports:
+      - "5439:5432"
+
+    environment:
+      POSTGRES_DB: navi_note_db
+      POSTGRES_PASSWORD: navi_note
+      POSTGRES_USER: navi_note
+      PGDATA: /mnt/data
+    volumes:
+      - ./db_vol_docker/_data:/mnt/data
+
