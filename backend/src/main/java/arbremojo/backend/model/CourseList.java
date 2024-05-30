@@ -14,9 +14,9 @@ public class CourseList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_list_id")
-    private int courseListId;
+    private Integer courseListId;
     @Column(name = "professor_id")
-    private int professorId;
+    private Integer professorId;
     @Column(name = "course_id")
-    private int courseId;
+    private Integer courseId;
 }

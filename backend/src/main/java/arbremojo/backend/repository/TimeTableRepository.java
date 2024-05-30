@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
     @Modifying
-    @Query("DELETE FROM Time_Table p WHERE p.timeTableId = :id")
+    @Query("DELETE FROM TimeTable p WHERE p.timeTableId = :id")
     Integer deleteEntityById(Integer id);
 }

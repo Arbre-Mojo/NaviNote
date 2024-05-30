@@ -14,7 +14,7 @@ public class Admin extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")
-    private int adminId;
+    private Integer adminId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")

@@ -14,7 +14,7 @@ public class Professor extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "professor_id")
-    private int professor_id;
+    private Integer professor_id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")

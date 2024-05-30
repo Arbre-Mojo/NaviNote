@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CourseListRepository extends JpaRepository<CourseList, Integer> {
     @Modifying
-    @Query("DELETE FROM Course_List p WHERE p.courseListId = :id")
+    @Query("DELETE FROM CourseList p WHERE p.courseListId = :id")
     Integer deleteEntityById(Integer id);
 }

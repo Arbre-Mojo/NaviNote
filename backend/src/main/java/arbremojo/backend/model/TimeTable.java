@@ -14,11 +14,11 @@ public class TimeTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "time_table_id")
-    private int timeTableId;
+    private Integer timeTableId;
     @Column(name = "student_id")
-    private int studentId;
+    private Integer studentId;
     @Column(name = "course_id")
-    private int courseId;
+    private Integer courseId;
     @Column(name = "time_start")
     private String timeStart;
     @Column(name = "time_end")
