@@ -1,0 +1,59 @@
+<div class="justification-main-div">
+  <div class="justification-div">
+    <div class="justification-header-div justification-elem">
+      <div class="justification-member-div">
+        <div class="user-pfp-img-div">
+          <img class="pfp-img" src="{{justification.student?.pfpImgUrl!}}" alt="user-pfp-img" *ngIf="justification.student?.pfpImgUrl != undefined">
+          <fa-icon class="user-icon-2" [icon]="faUser" *ngIf="justification.student?.pfpImgUrl == undefined"></fa-icon>
+        </div>
+        <div class="user-info-div">
+          <span>{{justification.student?.getName()}}</span>
+          <span>Promo: {{justification.student?.promo?.promoName}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="justification-body-div justification-elem">
+      <span>{{justification.reason}}</span>
+    </div>
+    <div class="justification-images-div justification-elem" *ngIf="hasImages">
+      <div (onResize)="onResize($event)" [style.justify-content]="justify" class="justification-images-container">
+        <div class="justification-image-div" *ngFor="let justificationImage of justification.justificationImageList">
+          <img class="justification-image" src="{{justificationImage.imageUrl}}" alt="{{justificationImage.name}}">
+          <div class="justification-image-hover">
+            <div class="clickable-icon-elem-1" (click)="onDownload(justificationImage)">
+              <fa-icon [icon]="faDownload" [class]="['clickable-icon-1']"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="default-btn" (click)="downloadAll()" *ngIf="justification.justificationImageList.length > 1">Download All</button>
+      </div>
+    </div>
+    <div class="info-div justification-elem">
+      <span class="text-font-700">Course</span>
+      <div class="separation-line-small"></div>
+      <span>{{ justification.timeTable?.course?.courseName }}</span>
+    </div>
+    <div class="info-div justification-elem">
+      <span>From</span>
+      <div class="separation-line-small"></div>
+      <span>{{ getDateTime(justification.timeTable?.timeStart!) }}</span>
+    </div>
+    <div class="info-div justification-elem">
+      <span>To</span>
+      <div class="separation-line-small"></div>
+      <span>{{ getDateTime(justification.timeTable?.timeEnd!) }}</span>
+    </div>
+    <div class="info-div justification-elem">
+      <span>Justification Accepted</span>
+      <div class="separation-line-small"></div>
+      <span>{{getJustificationAccepted()}}</span>
+    </div>
+    <div class="info-div justification-elem-2">
+      <button class="allow-button" (click)="updateJustification(true)">Accept</button>
+      <button class="deny-button" (click)="updateJustification(false)">Reject</button>
+    </div>
+  </div>
+</div>
+

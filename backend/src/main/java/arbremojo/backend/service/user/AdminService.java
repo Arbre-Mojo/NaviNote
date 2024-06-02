@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AdminService extends UserService<Admin, AdminRepository> {
 
@@ -33,6 +35,11 @@ public class AdminService extends UserService<Admin, AdminRepository> {
     @Override
     public Admin selectByToken(ByToken byToken) {
         return entityRepository.findByToken(byToken.getToken());
+    }
+
+    @Override
+    public List<Admin> getUsersByName(String name) {
+        return entityRepository.getUsersByName(name);
     }
 
     @Transactional

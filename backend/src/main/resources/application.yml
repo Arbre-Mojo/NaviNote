@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9000
   tomcat:
     accesslog:
       enabled: true
@@ -29,7 +29,7 @@ spring:
 
 socialnetwork:
   self:
-    url: localhost:9001
+    url: localhost:9000
 
 spring.mail.host: smtp.gmail.com
 spring.mail.port: 587

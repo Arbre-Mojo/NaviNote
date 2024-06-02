@@ -1,0 +1,17 @@
+<div (onResize)="handleFooterTopMinValue($event, 0)" class="sign-form-body">
+  <div class="sign-form-body-div">
+    <app-logo></app-logo>
+    <div class="sign-form-elem"><h1>Partner Selection</h1></div>
+    <div class="sign-form-elem">
+      <div *ngFor="let userCategory of userCategories">
+        <button class="auth-button" *ngIf="userCategory != studentCategory" (click)="userOnSelected(userCategory)">
+          {{ userCategory?.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer
+  [footerTopMinValue]="footerTopMinValue"
+  [position]="position"
+></app-footer>

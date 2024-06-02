@@ -13,8 +13,8 @@ import lombok.*;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
+    @Column(name = "course_id", nullable = false)
     private Integer courseId;
-    @Column(name = "course_name")
+    @Column(name = "course_name", nullable = false)
     private String courseName;
 }

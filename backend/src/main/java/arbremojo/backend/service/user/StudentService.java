@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class StudentService extends UserService<Student, StudentRepository> {
     @Autowired
@@ -32,6 +34,11 @@ public class StudentService extends UserService<Student, StudentRepository> {
     @Override
     public Student selectByToken(ByToken byToken) {
         return entityRepository.findByToken(byToken.getToken());
+    }
+
+    @Override
+    public List<Student> getUsersByName(String name) {
+        return entityRepository.getUsersByName(name);
     }
 
     @Transactional

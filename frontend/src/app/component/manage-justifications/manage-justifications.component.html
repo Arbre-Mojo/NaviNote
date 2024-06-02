@@ -1,0 +1,8 @@
+<div class="main-page-body-div">
+  <div class="posts-container" *ngFor="let justification of justifications">
+    <app-justification
+      [style.width.%]="100"
+      [justification]="justification">
+    </app-justification>
+  </div>
+</div>

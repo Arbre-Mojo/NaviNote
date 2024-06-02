@@ -1,0 +1,9 @@
+<div class="main-page-body-div">
+  <div class="cs-body">
+    <app-connection-security-element *ngIf="user != undefined"
+      [user]="user"
+      [userService]="userService"
+      [userCategory]="userCategory"
+    ></app-connection-security-element>
+  </div>
+</div>

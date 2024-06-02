@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<!--Header doesn't show on selected pages-->
+<app-header *ngIf="isNotExcludedHeaderRoute() && currentUserService.isLoggedIn()"></app-header>
+
+<!--Application contents-->
+<div>
+  <router-outlet></router-outlet>
+</div>

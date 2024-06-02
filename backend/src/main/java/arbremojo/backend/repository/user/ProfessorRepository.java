@@ -6,11 +6,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface ProfessorRepository extends JpaRepository<Professor, Integer> {
 
     Professor findByEmail(String email);
 
     Professor findByToken(String token);
+
+    @Query("SELECT c FROM Professor c WHERE LOWER(c.firstName) LIKE %:name% OR LOWER(c.lastName) LIKE %:name%")
+    List<Professor> getUsersByName(String name);
 
     @Modifying
     @Query("Update Professor c SET c.password = :password WHERE c.email = :email")

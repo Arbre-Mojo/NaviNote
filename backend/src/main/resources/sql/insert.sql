@@ -1,24 +1,33 @@
-INSERT INTO Student (first_name, last_name, email, password)
-VALUES ('John', 'Doe', 'john.doe@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Jane', 'Smith', 'jane.smith@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Michael', 'Johnson', 'michael.johnson@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Emily', 'Brown', 'emily.brown@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('David', 'Martinez', 'david.martinez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Sarah', 'Garcia', 'sarah.garcia@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Daniel', 'Lopez', 'daniel.lopez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Jennifer', 'Rodriguez', 'jennifer.rodriguez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('James', 'Wilson', 'james.wilson@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
-       ('Jessica', 'Lee', 'jessica.lee@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e');
+INSERT INTO Promo(promo_name)
+VALUES('I1'),
+      ('I2'),
+      ('P1'),
+      ('P2'),
+      ('A1'),
+      ('A2'),
+      ('A3');
 
-INSERT INTO Administrator (first_name, last_name, email, password)
+INSERT INTO Student (first_name, last_name, email, password, promo_id)
+VALUES ('John', 'Doe', 'student@student.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 1),
+       ('Jane', 'Smith', 'jane.smith@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 2),
+       ('Michael', 'Johnson', 'michael.johnson@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 3),
+       ('Emily', 'Brown', 'emily.brown@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 4),
+       ('David', 'Martinez', 'david.martinez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 5),
+       ('Sarah', 'Garcia', 'sarah.garcia@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 1),
+       ('Daniel', 'Lopez', 'daniel.lopez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 2),
+       ('Jennifer', 'Rodriguez', 'jennifer.rodriguez@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 3),
+       ('James', 'Wilson', 'james.wilson@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 4),
+       ('Jessica', 'Lee', 'jessica.lee@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e', 5);
+
+INSERT INTO Admin (first_name, last_name, email, password)
 VALUES
-    ('Admin', 'One', 'admin1@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
+    ('Admin', 'One', 'admin@admin.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
     ('Admin', 'Two', 'admin2@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
     ('Admin', 'Three', 'admin3@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e');
 
 INSERT INTO Professor (first_name, last_name, email, password)
 VALUES
-    ('John', 'Smith', 'john.smith@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
+    ('John', 'Smith', 'prof@prof.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
     ('Emily', 'Johnson', 'emily.johnson@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e'),
     ('Michael', 'Brown', 'michael.brown@example.com', '$2a$10$BmcMCDQomX1CcxNh891qc.gqJWvi9C72csoM4pOgS2UiqQnYaCP6e');
 
@@ -28,12 +37,16 @@ VALUES
     ('English'),
     ('Physics');
 
+INSERT INTO Time_Table (student_id, course_id, time_start, time_end, room, campus, absent, minutes_late)
+VALUES     (1, 1, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC', true, 0),
+           (1, 2, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC', true, 0),
+           (1, 3, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC', true, 0),
+           (1, 1, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC', false, 10),
+           (1, 2, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC', false, 20),
+           (1, 3, '2024-05-16 09:00:00', '2024-05-16 11:00:00', 'L12', 'NDL', false, 30);
+
 INSERT INTO Time_Table (student_id, course_id, time_start, time_end, room, campus)
 VALUES
-    (1, 1, '2024-05-15 08:00:00', '2024-05-15 10:00:00', 'N16A', 'NDC'),
-    (1, 2, '2024-05-16 09:00:00', '2024-05-16 11:00:00', 'L12', 'NDL'),
-    (1, 3, '2024-05-17 10:00:00', '2024-05-17 12:00:00', 'Hors ISEP', 'Teams'),
-
     (2, 1, '2024-05-15 09:00:00', '2024-05-15 11:00:00', 'N16A', 'NDC'),
     (2, 2, '2024-05-16 10:00:00', '2024-05-16 12:00:00', 'L12', 'NDL'),
     (2, 3, '2024-05-17 11:00:00', '2024-05-17 13:00:00', 'Hors ISEP', 'Teams'),

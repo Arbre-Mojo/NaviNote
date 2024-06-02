@@ -1,0 +1,69 @@
+@import "../../common.scss";
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+}
+
+.message-body-div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+
+  padding: 10px;
+  max-width: 300px;
+  min-width: 200px;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 3px;
+}
+
+.small-span {
+  font-size: 12px;
+}
+
+.username-span {
+  padding-right: 15px;
+}
+
+.expandable-span {
+  text-wrap: wrap;
+  word-break: break-word;
+}
+
+.message-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+
+  width: 100%;
+
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.admin-message-type {
+  background: $colorP11;
+}
+
+.student-message-type {
+  background: $colorP15;
+}
+
+.professor-message-type {
+  background: $colorP14;
+}

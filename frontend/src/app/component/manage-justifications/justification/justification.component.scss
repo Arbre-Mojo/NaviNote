@@ -1,0 +1,216 @@
+@import '../../common.scss';
+
+$header-div-height: 65px;
+$images-container-height: 200px;
+$justification-elem-padding: 15px;
+
+.justification-elem {
+  padding: 15px 15px 0 15px;
+}
+
+.justification-elem-2 {
+  padding: 15px;
+}
+
+.justification-main-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 20px;
+}
+
+.justification-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 40%;
+  border-radius: 15px;
+  box-shadow: $boxShadowDefault;
+}
+
+.justification-header-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: $header-div-height;
+}
+
+.justification-member-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+
+  width: 50%;
+  cursor: pointer;
+}
+
+.user-pfp-img-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
+}
+
+.pfp-img {
+  width: $header-div-height - $justification-elem-padding;
+  height: $header-div-height - $justification-elem-padding;
+
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-info-div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+}
+
+.time-table-info-div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+
+  width: 50%;
+  height: 100%;
+}
+
+.justification-body-div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+
+  width: 100%;
+}
+
+.justification-images-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  border-radius: 15px;
+}
+
+.justification-images-container {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  z-index: 1;
+  width: 100%;
+}
+
+.justification-image-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin: 12px 7px 12px 7px;
+  border-radius: 10px;
+  box-shadow: $boxShadowDefault;
+}
+
+.justification-image, .justification-image-hover {
+  width: $images-container-height - $justification-elem-padding;
+  height: $images-container-height - $justification-elem-padding;
+
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.justification-image-hover {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: absolute;
+  z-index: auto;
+  background-color: $hoverBackground;
+}
+
+.clickable-icon-1 {
+  color: white;
+}
+
+.justification-image:hover + .justification-image-hover, .justification-image-hover:hover {
+  display: flex;
+}
+
+.justification-likes-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.likes-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.likes-count-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 15px;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  white-space: nowrap;
+}
+
+
+/*SCROLLBAR STUFF*/
+/* width */
+::-webkit-scrollbar {
+  height: 10px;
+  border-radius: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 15px;
+}

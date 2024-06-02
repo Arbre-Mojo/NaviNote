@@ -6,9 +6,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface AdminRepository extends JpaRepository<Admin, Integer>{
+import java.util.List;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
     Admin findByEmail(String email);
+
     Admin findByToken(String token);
+
+    @Query("SELECT c FROM Admin c WHERE LOWER(c.firstName) LIKE %:name% OR LOWER(c.lastName) LIKE %:name%")
+    List<Admin> getUsersByName(String name);
 
     @Modifying
     @Query("Update Admin c SET c.password = :password WHERE c.email = :email")

@@ -1,0 +1,27 @@
+@import '../common.scss';
+
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+}
+
+.navigation-elem-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px 0 20px;
+
+  cursor: pointer;
+  border-radius: 15px;
+  height: 30px;
+}
+
+.navigation-elem-div:hover {
+  background: $colorP11;
+}

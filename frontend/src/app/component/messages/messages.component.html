@@ -1,0 +1,48 @@
+<div class="main-page-body-div">
+  <div class="header-elem">
+    <div class="header-icon-elem">
+      <fa-icon [class]="['header-icon']" [icon]="messagesNavigationItem.getIcon()"></fa-icon>
+    </div>
+    <h1 class="main-page-h1">Messages</h1>
+  </div>
+  <div class="separation-line-2"></div>
+  <div class="message-box-body-div">
+    <div class="message-box-body">
+      <div class="header-div"></div>
+      <div class="container-div">
+        <div class="conversation-element-container">
+          <div class="autocomplete-div" *ngIf="!isAdminCategory()">
+            <p-autoComplete name="auto-complete"
+                            [(ngModel)]="selectedUser"
+                            [placeholder]="placeholder"
+                            [inputStyleClass]="'default-input-2'"
+                            [styleClass]="'default-input-1-container'"
+                            [style.width.%]="100"
+                            [suggestions]="foundUsers"
+                            (click)="onUserSelected()"
+                            (onKeyUp)="onSubmitUser($event)"/>
+          </div>
+          <div class="conversation-element-body-div" *ngFor="let conversationElement of conversationElements" (click)="onConversationElementClick(conversationElement)">
+            <app-conversation-element
+              [style.width.%]="100"
+              [conversationElement]="conversationElement">
+            </app-conversation-element>
+          </div>
+        </div>
+        <div class="message-main-area-div">
+          <div #messageAreaDiv class="message-area-div">
+            <div class="message-list-body-div" *ngFor="let messageListElement of messageListElements">
+              <app-message-list-element
+                [style.width.%]="100"
+                [messageListElement]="messageListElement">
+              </app-message-list-element>
+            </div>
+          </div>
+          <form class="message-input-form" (ngSubmit)="onMessageEnter()">
+            <input class="default-input-2" [(ngModel)]="messageTyped" autocomplete="off" placeholder="Type a message..." name="message-input">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

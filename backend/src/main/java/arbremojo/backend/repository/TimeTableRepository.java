@@ -5,8 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
     @Modifying
     @Query("DELETE FROM TimeTable p WHERE p.timeTableId = :id")
     Integer deleteEntityById(Integer id);
+
+    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId AND p.absent = true")
+    List<TimeTable> getAbsencesByStudentId(Integer studentId);
+
+    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId AND p.minutesLate > 0")
+    List<TimeTable> getDelaysByStudentId(Integer studentId);
 }

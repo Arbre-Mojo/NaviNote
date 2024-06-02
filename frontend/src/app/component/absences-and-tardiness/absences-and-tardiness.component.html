@@ -1,0 +1,95 @@
+<div class="main-page-body-div">
+  <app-navigation-menu class="navigation-menu"
+                       [navigationItems]="navigationItems"
+                       (clickedOnEmitter)="navigationItemOnClick($event)">
+  </app-navigation-menu>
+  <div class="separation-line-2"></div>
+  <div class="elements-container">
+    <div class="totals-container-body">
+      <div class="details-container">
+        <div class="top-container">
+          <div class="side-container">
+            <div class="icon-elem-2">
+              <fa-icon [icon]="faCalculator" [class]="['icon-2']"></fa-icon>
+            </div>
+          </div>
+          <div class="main-container">
+            <div class="info-div">
+              <span class="text-font-700">{{ selectedNavigationItem.getName() }}</span>
+            </div>
+            <div class="info-div">
+              <span>To Justify</span>
+              <div class="separation-line-small"></div>
+              <span>{{ getTotals().toJustifyTime }}</span>
+            </div>
+            <div class="info-div">
+              <span>Justified</span>
+              <div class="separation-line-small"></div>
+              <span>{{ getTotals().justifiedTime }}</span>
+            </div>
+            <div class="info-div">
+              <span>Unjustified</span>
+              <div class="separation-line-small"></div>
+              <span>{{ getTotals().unjustifiedTime }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="details-container-body" *ngFor="let timeTable of selectedTimeTables">
+      <div class="details-container">
+        <div class="top-container">
+          <div class="side-container">
+            <div class="icon-elem-2">
+              <fa-icon [icon]="selectedNavigationItem.getIcon()" [class]="['icon-2']"></fa-icon>
+            </div>
+          </div>
+          <div class="main-container">
+            <div class="info-div">
+              <span>From</span>
+              <div class="separation-line-small"></div>
+              <span>{{ getDateTime(timeTable.timeStart) }}</span>
+            </div>
+            <div class="info-div">
+              <span>To</span>
+              <div class="separation-line-small"></div>
+              <span>{{ getDateTime(timeTable.timeEnd) }}</span>
+            </div>
+            <div class="info-div">
+              <span>Length</span>
+              <div class="separation-line-small"></div>
+              <span
+                *ngIf="selectedNavigationItem === absencesNavigationItem">{{ getTimeDiff(timeTable.timeStart, timeTable.timeEnd) }}</span>
+              <span
+                *ngIf="selectedNavigationItem === tardinessNavigationItem">{{ getTime(timeTable.minutesLate) }}</span>
+            </div>
+            <div class="info-div">
+              <span>Class</span>
+              <div class="separation-line-small"></div>
+              <span>{{ timeTable.course?.courseName }}</span>
+            </div>
+            <div class="info-div">
+              <span>Justification Sent</span>
+              <div class="separation-line-small"></div>
+              <span>{{ hasJustification(timeTable) ? 'True' : 'False' }}</span>
+            </div>
+            <div class="info-div">
+              <span>Justification Accepted</span>
+              <div class="separation-line-small"></div>
+              <span>{{ isJustificationAccepted(timeTable) ? 'True' : 'False' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="button-div" *ngIf="!hasJustification(timeTable)">
+          <button class="default-btn" (click)="onOpenModal(timeTable)">Justify</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-justification-modal
+  [isModalOpen]="isJustificationModalOpen"
+  [justification]="newJustification"
+  [selectedTimeTable]="selectedTimeTable"
+  (onModalChangeEmitter)="onCloseModal()">
+</app-add-justification-modal>

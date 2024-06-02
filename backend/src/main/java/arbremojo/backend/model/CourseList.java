@@ -1,5 +1,6 @@
 package arbremojo.backend.model;
 
+import arbremojo.backend.model.user.Professor;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,10 +14,11 @@ import lombok.*;
 public class CourseList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_list_id")
+    @Column(name = "course_list_id", nullable = false)
     private Integer courseListId;
-    @Column(name = "professor_id")
+
+    @JoinColumn(name = "professor_id", nullable = false)
     private Integer professorId;
-    @Column(name = "course_id")
+    @JoinColumn(name = "course_id", nullable = false)
     private Integer courseId;
 }

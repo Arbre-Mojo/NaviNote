@@ -1,0 +1,60 @@
+<div class="modal my-modal" *ngIf="isModalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header my-modal-header">
+        <span class="modal-header-title">New Justification for your {{ selectedTimeTable.course?.courseName }}
+          Course</span>
+        <div class="clickable-icon-elem-1" (click)="closeModal()">
+          <fa-icon [icon]="faXmark" [class]="['clickable-icon-1']"></fa-icon>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="my-modal-element">
+          <div class="add-form-elem-1">
+            <label for="reason-input">Reason:</label>
+            <textarea class="default-text-area-3" [(ngModel)]="justification.reason" id="reason-input"></textarea>
+          </div>
+        </div>
+        <div class="my-modal-element">
+          <div class="add-form-elem-1">
+            <span>Attach Images:</span>
+            <div class="drag-and-drop-elem">
+              <span>Click Or Drag</span>
+              <input #imageInput id="images-input" type="file" multiple="multiple"
+                     accept="image/png, image/gif, image/jpeg" name="files"
+                     class="drag-and-drop-input" (change)="onImageAttached($event)">
+            </div>
+          </div>
+          <div class="add-form-elem-1" *ngIf="justification.justificationImageList!.length > 0">
+            <span>Attached Images:</span>
+          </div>
+          <div class="image-preview-container">
+            <div *ngFor="let justificationImage of justification.justificationImageList">
+              <div class="image-preview-elem-main">
+                <div class="image-preview-elem">
+                  <img class="image-preview" src="{{justificationImage.imageUrl}}" alt="img">
+                </div>
+
+                <div class="image-preview-edit-elem">
+                  <fa-icon [icon]="faTrash" [class]="['clickable-icon-1', 'trash-icon']"
+                           (click)="onDeleteImage(justificationImage)"></fa-icon>
+                </div>
+
+                <div class="image-might-delete-elem" *ngIf="justificationImage.mightDelete">
+                  <fa-icon [icon]="faXmark" [class]="['clickable-icon-1', 'might-delete-icon']"
+                           (click)="onDeleteImage(justificationImage)"></fa-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="validation-error-span">{{ imagesStatusMsg }}</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="clickable-icon-elem-1" (click)="onAcceptClick()">
+          <fa-icon [icon]="faCheck" [class]="['clickable-icon-1']"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

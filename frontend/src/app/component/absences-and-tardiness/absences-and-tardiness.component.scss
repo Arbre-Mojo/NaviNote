@@ -1,0 +1,105 @@
+@import '../common.scss';
+
+.main-page-body-div {
+  padding: 0;
+}
+
+.navigation-menu {
+  width: 100%;
+
+  padding: 10px 10px 0 10px;
+}
+
+.elements-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.totals-container-body, .details-container-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: $boxShadowDefault;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+.totals-container-body {
+  width: 60%;
+}
+
+.details-container-body {
+  width: 40%;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 10px;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.side-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 90px;
+  width: 10%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 90%;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 5px;
+  white-space: nowrap;
+}
+
+.info-div span:first-child {
+  padding-right: 5px;
+}
+
+.info-div span:nth-child(2) {
+  padding-left: 5px;
+}
+
+.button-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5px;
+}

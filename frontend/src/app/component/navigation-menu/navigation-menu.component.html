@@ -1,0 +1,10 @@
+<div class="navigation-container">
+  <div *ngFor="let navigationItem of navigationItems">
+    <div class="navigation-elem-div" (click)="onClick(navigationItem)" *ngIf="navigationItem.isAllowedForUserCategory(getCurrentUserCategory())">
+      <div class="icon-elem-1">
+        <fa-icon [icon]="navigationItem.getIcon()" [class]="['icon-1']"></fa-icon>
+      </div>
+      <span>{{ navigationItem.getName() }}</span>
+    </div>
+  </div>
+</div>

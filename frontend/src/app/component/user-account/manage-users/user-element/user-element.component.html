@@ -1,0 +1,26 @@
+<div class="user-elem">
+  <div class="pfp-elem-main">
+    <div class="pfp-elem">
+      <img class="image-frame" src="{{user?.pfpImgUrl}}" alt="pfp-image" *ngIf="user?.hasPfpImg()">
+      <div class="image-frame" *ngIf="!user?.hasPfpImg()">
+        <fa-icon [class]="['user-icon']" [icon]="faUser"></fa-icon>
+      </div>
+    </div>
+    <div class="pfp-elem-edit" (click)="onEditImgPfp()">
+      <fa-icon [class]="['camera-icon']" [icon]="faCamera"></fa-icon>
+    </div>
+  </div>
+  <div class="info-elem">
+    <span class="text-font-700">{{user?.getName()}}</span>
+    <span>{{user?.getName()}}</span>
+    <span>{{user?.email}}</span>
+    <div class="edit-elem">
+      <div class="clickable-icon-elem-3" (click)="onEditUser()">
+        <fa-icon [class]="['clickable-icon-3']" [icon]="faPen"></fa-icon>
+      </div>
+      <div class="clickable-icon-elem-3" (click)="onDeleteUser()">
+        <fa-icon [class]="['clickable-icon-3']" [icon]="faTrash"></fa-icon>
+      </div>
+    </div>
+  </div>
+</div>
