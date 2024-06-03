@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emploi du Temps</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .week-link {
+      font-size: x-small;
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      line-height: 0.8;
+    }
+    .current-week {
+      background-color: yellow;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container-fluid mt-4">
+
+  <!-- Table des semaines de l'année -->
+  <div class="week-table-container mb-2">
+    <h4 class="text-center">Semaines</h4>
+    <table class="table table-bordered table-sm text-center">
+      <tbody>
+      <tr id="weeks-row">
+        <!-- Numéro des semaines -->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Titre de la semaine actuelle -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-auto">
+      <a href="#" class="btn btn-link"><</a>
+    </div>
+    <h2 class="col-auto">Semaine 23</h2>
+    <div class="col-auto">
+      <a href="#" class="btn btn-link">></a>
+    </div>
+  </div>
+
+  <!-- Emploi du temps de la semaine en cours -->
+  <div class="schedule-table-container">
+    <table class="table table-bordered table-sm text-center">
+      <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">Heures</th>
+        <th style="width: 13%;">Lundi<br>03/06</th>
+        <th style="width: 13%;">Mardi<br>04/06</th>
+        <th style="width: 13%;">Mercredi<br>05/06</th>
+        <th style="width: 13%;">Jeudi<br>06/06</th>
+        <th style="width: 13%;">Vendredi<br>07/06</th>
+        <th style="width: 13%;">Samedi<br>08/06</th>
+        <th style="width: 5%;">Heures</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="align-middle">
+        <td class="align-middle py-3">08:00</td>
+        <td class="align-middle py-3" id="mon-08"></td>
+        <td class="align-middle py-3" id="tue-08"></td>
+        <td class="align-middle py-3" id="wed-08"></td>
+        <td class="align-middle py-3" id="thu-08"></td>
+        <td class="align-middle py-3" id="fri-08"></td>
+        <td class="align-middle py-3" id="sat-08"></td>
+        <td class="align-middle py-3">08:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">10:00</td>
+        <td class="align-middle py-3" id="mon-10"></td>
+        <td class="align-middle py-3" id="tue-10"></td>
+        <td class="align-middle py-3" id="wed-10"></td>
+        <td class="align-middle py-3" id="thu-10"></td>
+        <td class="align-middle py-3" id="fri-10"></td>
+        <td class="align-middle py-3" id="sat-10"></td>
+        <td class="align-middle py-3">10:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">12:00</td>
+        <td class="align-middle py-3" id="mon-12"></td>
+        <td class="align-middle py-3" id="tue-12"></td>
+        <td class="align-middle py-3" id="wed-12"></td>
+        <td class="align-middle py-3" id="thu-12"></td>
+        <td class="align-middle py-3" id="fri-12"></td>
+        <td class="align-middle py-3" id="sat-12"></td>
+        <td class="align-middle py-3">12:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">14:00</td>
+        <td class="align-middle py-3" id="mon-14"></td>
+        <td class="align-middle py-3" id="tue-14"></td>
+        <td class="align-middle py-3" id="wed-14"></td>
+        <td class="align-middle py-3" id="thu-14"></td>
+        <td class="align-middle py-3" id="fri-14"></td>
+        <td class="align-middle py-3" id="sat-14"></td>
+        <td class="align-middle py-3">14:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">16:00</td>
+        <td class="align-middle py-3" id="mon-16"></td>
+        <td class="align-middle py-3" id="tue-16"></td>
+        <td class="align-middle py-3" id="wed-16"></td>
+        <td class="align-middle py-3" id="thu-16"></td>
+        <td class="align-middle py-3" id="fri-16"></td>
+        <td class="align-middle py-3" id="sat-16"></td>
+        <td class="align-middle py-3">16:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">18:00</td>
+        <td class="align-middle py-3" id="mon-18"></td>
+        <td class="align-middle py-3" id="tue-18"></td>
+        <td class="align-middle py-3" id="wed-18"></td>
+        <td class="align-middle py-3" id="thu-18"></td>
+        <td class="align-middle py-3" id="fri-18"></td>
+        <td class="align-middle py-3" id="sat-18"></td>
+        <td class="align-middle py-3">18:00</td>
+      </tr>
+      <tr class="align-middle">
+        <td class="align-middle py-3">20:00</td>
+        <td class="align-middle py-3" id="mon-20"></td>
+        <td class="align-middle py-3" id="tue-20"></td>
+        <td class="align-middle py-3" id="wed-20"></td>
+        <td class="align-middle py-3" id="thu-20"></td>
+        <td class="align-middle py-3" id="fri-20"></td>
+        <td class="align-middle py-3" id="sat-20"></td>
+        <td class="align-middle py-3">20:00</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="../static/js/timetable.js"></script>
+
+</body>
+</html>
+
+
