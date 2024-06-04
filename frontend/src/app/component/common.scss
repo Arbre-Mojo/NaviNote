@@ -14,14 +14,14 @@ $colorP25: #4D4861;
  */
 
 // Actual Color Palette
-$colorP10: #2fb858;
-$colorP11_2: #e0bb95;
-$colorP11: #2fb858;
-$colorP12: #7aef9d;
-$colorP13: #FEFAE0;
-$colorP14: #E9EDC9;
-$colorP15: #CCD5AE;
-$colorP16: #f6f3ea;
+$colorP10: #187a35;
+$colorP11_2: #2e8141;
+$colorP11: #4c865c;
+$colorP12: #a6e0b0;
+$colorP13: #92b69f;
+$colorP14: #acc7b5;
+$colorP15: #cfe0d4;
+$colorP16: #cfe0d4;
 $colorP17: #f3f0f0;
 $colorP18: #d9d9d9;
 $colorP19: #3f3f3f;
@@ -39,17 +39,19 @@ $hoverBackground: rgba(0, 0, 0, 0.3);
 
 // For non scss files
 :root {
-  --colorP10: #915c35;
-  --colorP11: #D4A373;
-  --colorP12: #FAEDCD;
-  --colorP13: #FEFAE0;
-  --colorP14: #E9EDC9;
-  --colorP15: #CCD5AE;
-  --colorP16: #f6f3ea;
+  --colorP10: #187a35;
+  --colorP11_2: #2e8141;
+  --colorP11: #4c865c;
+  --colorP12: #a6e0b0;
+  --colorP13: #92b69f;
+  --colorP14: #acc7b5;
+  --colorP15: #cfe0d4;
+  --colorP16: #cfe0d4;
   --colorP17: #f3f0f0;
   --colorP18: #d9d9d9;
   --colorP19: #3f3f3f;
   --colorP20: #737373;
+  --colorP21: #FCFCFC;
 }
 
 .our-linear-background-1 {
