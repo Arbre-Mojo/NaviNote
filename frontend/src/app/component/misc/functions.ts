@@ -43,6 +43,18 @@ export function getDateTimeDifference(dateTimeStart: string, dateTimeEnd: string
   return {hours: totalHours, minutes: remMinutes, seconds: remSeconds};
 }
 
+export function getGcd(a: number, b: number): number {
+  if (a === b) {
+    return a
+  }
+
+  if (a > b) {
+    return getGcd(a - b, b)
+  }
+
+  return getGcd(a, b - a)
+}
+
 export function getFormattedTime(timeInMinutes: number) {
   let hours = Math.floor(timeInMinutes / 60);
   let minutes = timeInMinutes % 60;

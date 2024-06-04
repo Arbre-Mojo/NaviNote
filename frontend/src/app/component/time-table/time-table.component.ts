@@ -9,7 +9,7 @@ import {ProfessorService} from "../../../service/user/professor.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TimeTable} from "../../../model/time-table";
 import {HttpErrorResponse} from "@angular/common/http";
-import {createRange, getDateString, getDateTimeDifference, getTimeString} from "../misc/functions";
+import {createRange, getDateString, getDateTimeDifference, getGcd, getTimeString} from "../misc/functions";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
 import {NgxResizeObserverModule} from "ngx-resize-observer";
 import {SubjectWrapperElementComponent} from "./subject-wrapper-element/subject-wrapper-element.component";
@@ -134,30 +134,63 @@ export class TimeTableComponent extends CookieComponent implements OnInit {
       dates.push(date);
     }
 
-    this.timeStrings = [];
-    if (localTimeTables.length === 0) {
-      this.timeStrings = Array.from({length: 11}, (_, i) => `${String(i + 8).padStart(2, '0')}:00`);
-    } else {
-      localTimeTables.forEach(timeTable => {
-        let timeStartDate = new Date(timeTable.timeStart);
-        let timeEndDate = new Date(timeTable.timeEnd);
-
-
-        while(timeStartDate <= timeEndDate) {
-          let timeStart = getTimeString(timeStartDate);
-
-          if(!this.timeStrings.includes(timeStart)) {
-            this.timeStrings.push(timeStart);
-          }
-
-          timeStartDate.setHours(timeStartDate.getHours() + 1);
-        }
-      });
-      this.timeStrings.sort((a, b) => a.localeCompare(b));
-    }
-
     let timeList: Time[] = this.getTimeList(localTimeTables);
     console.log(timeList)
+
+    this.timeStrings = [];
+    if (timeList.length === 0) {
+      this.timeStrings = Array.from({length: 11}, (_, i) => `${String(i + 8).padStart(2, '0')}:00`);
+    } else {
+      timeList.forEach(time => {
+        let minMinutes = new Date(time.timeTableCells[0].timeTable.timeStart).getMinutes();
+        let minGcd = Number.MAX_VALUE;
+        time.timeTableCells.forEach(timeTableCell => {
+          let timeTable = timeTableCell.timeTable;
+          let timeStartDate = new Date(timeTable.timeStart);
+          let timeEndDate = new Date(timeTable.timeEnd);
+          if(timeStartDate.getMinutes() < minMinutes && timeStartDate.getMinutes() != 0) {
+            minMinutes = timeStartDate.getMinutes();
+          }
+          if(timeEndDate.getMinutes() < minMinutes && timeEndDate.getMinutes() != 0) {
+            minMinutes = timeEndDate.getMinutes();
+          }
+          let gcd = Math.min(getDateGcd(timeStartDate.getMinutes(), minMinutes), getDateGcd(timeEndDate.getMinutes(), minMinutes));
+          minGcd = Math.min(minGcd, gcd);
+          console.log(minMinutes)
+          console.log(minGcd)
+          console.log("--------------")
+        });
+
+        time.timeTableCells.forEach(timeTableCell => {
+          console.log(minGcd)
+
+          let timeTable = timeTableCell.timeTable;
+          let timeStartDate = new Date(timeTable.timeStart);
+          let timeEndDate = new Date(timeTable.timeEnd);
+
+
+
+          while (timeStartDate <= timeEndDate) {
+            let timeStart = getTimeString(timeStartDate);
+
+            if (!this.timeStrings.includes(timeStart)) {
+              this.timeStrings.push(timeStart);
+            }
+
+            if (minGcd == 0) {
+              timeStartDate.setHours(timeStartDate.getHours() + 1);
+            } else {
+              timeStartDate.setMinutes(timeStartDate.getMinutes() + minGcd);
+            }
+          }
+
+        });
+
+
+      });
+      this.timeStrings.sort((a, b) => a.localeCompare(b));
+      console.log(this.timeStrings)
+    }
 
     this.grid = [];
     for (let date of dates) {
@@ -223,7 +256,7 @@ export class TimeTableComponent extends CookieComponent implements OnInit {
 
     timeList.forEach(time => {
       time.timeTableCells.forEach(timeTableCell => {
-        timeTableCell.setDisplayBooleans(time.timeStartDate, time.timeEndDate);
+        timeTableCell.setDisplayBooleans(time);
       });
     });
 
@@ -235,12 +268,30 @@ export class TimeTableComponent extends CookieComponent implements OnInit {
   }
 
   getTemplateRows(time: Time) {
-    return `repeat(${time.getHours() - 1}, ${this.cellHeight}px) ${this.cellHeight - 2}px`;
+    return `repeat(${this.getSpan(time.timeStartDate.toISOString(), time.timeEndDate.toISOString()) - 1}, ${this.cellHeight}px) ${this.cellHeight - 2}px`;
+  }
+
+
+  getSpan(timeStartString: string, timeEndString: string) {
+    let timeStartStringTemp = getTimeString(new Date(timeStartString));
+    let timeEndStringTemp = getTimeString(new Date(timeEndString));
+
+    let startIndex = this.timeStrings.indexOf(timeStartStringTemp);
+    let endIndex = this.timeStrings.indexOf(timeEndStringTemp);
+    return endIndex - startIndex;
+  }
+
+  getSpanString(timeStartString: string, timeEndString: string) {
+    return `span ${this.getSpan(timeStartString, timeEndString)}`;
+  }
+
+  getHours(timeStartString: string, timeEndString: string) {
+    return getDateTimeDifference(timeStartString, timeEndString).hours;
   }
 
 
   onResize(event: ResizeObserverEntry) {
-    let availableHeight = window.innerHeight * 0.8
+    let availableHeight = window.innerHeight * 0.9;
     this.cellHeight = availableHeight / this.timeStrings.length;
   }
 }
@@ -267,14 +318,6 @@ class Time {
     this.timeTableCells = timeTableCells;
   }
 
-  getSpan() {
-    return `span ${this.getHours()}`;
-  }
-
-  getHours() {
-    return getDateTimeDifference(this.timeStartDate.toISOString(), this.timeEndDate.toISOString()).hours;
-  }
-
   displayTimeTableCell(timeTableCell: TimeTableCell) {
     this.timeTableCells.forEach(timeTableCell => timeTableCell.displayed = false);
     timeTableCell.displayed = true;
@@ -291,22 +334,14 @@ export class TimeTableCell {
     this.displayed = displayed;
   }
 
-  getHours() {
-    return getDateTimeDifference(this.timeTable.timeStart, this.timeTable.timeEnd).hours;
-  }
-
-  getSpan() {
-    return `span ${this.getHours()}`;
-  }
-
-  setDisplayBooleans(mainTimeStartDate: Date, mainTimeEndDate: Date) {
-    let mainTimeStartDateTemp = new Date(mainTimeStartDate);
-    let mainTimeEndDateTemp = new Date(mainTimeEndDate);
+  setDisplayBooleans(time: Time) {
+    let mainTimeStartDateTemp = new Date(time.timeStartDate);
+    let mainTimeEndDateTemp = new Date(time.timeEndDate);
 
     let timeStartDate = new Date(this.timeTable.timeStart);
     let timeEndDate = new Date(this.timeTable.timeEnd);
 
-
+    let gcd = getSmallestGcd(time);
     while (mainTimeStartDateTemp < mainTimeEndDateTemp) {
       if (mainTimeStartDateTemp >= timeStartDate && mainTimeStartDateTemp < timeEndDate) {
         if (!this.displayBooleans[this.displayBooleans.length - 1]) {
@@ -316,7 +351,51 @@ export class TimeTableCell {
         this.displayBooleans.push(false);
       }
 
-      mainTimeStartDateTemp.setHours(mainTimeStartDateTemp.getHours() + 1);
+      if (gcd == 0) {
+        mainTimeStartDateTemp.setHours(mainTimeStartDateTemp.getHours() + 1);
+      } else {
+        mainTimeStartDateTemp.setMinutes(mainTimeStartDateTemp.getMinutes() + gcd);
+      }
     }
   }
+}
+
+function getSmallestGcd(time: Time) {
+  let gcd = Number.MAX_VALUE;
+  let minutesList: number[] = [];
+
+  for (let timeTableCell of time.timeTableCells) {
+    let timeStartDate = new Date(timeTableCell.timeTable.timeStart);
+    let timeEndDate = new Date(timeTableCell.timeTable.timeEnd);
+
+    if (timeStartDate.getMinutes() != 0) {
+      minutesList.push(timeStartDate.getMinutes());
+    }
+    if (timeEndDate.getMinutes() != 0) {
+      minutesList.push(timeEndDate.getMinutes());
+    }
+  }
+
+  for (let i = 0; i < minutesList.length; i++) {
+    for (let j = 0; j < minutesList.length; j++) {
+      if (i != j) {
+        gcd = Math.min(gcd, getGcd(minutesList[i], minutesList[j]));
+      }
+    }
+  }
+
+  return gcd == Number.MAX_VALUE ? 0 : gcd
+}
+
+function getDateGcd(timeStartMinutes: number, timeEndMinutes: number) {
+  let gcd = 0;
+
+  if (timeStartMinutes != 0 && timeEndMinutes != 0) {
+    gcd = getGcd(timeStartMinutes, timeEndMinutes);
+  } else if (timeStartMinutes != 0) {
+    gcd = timeStartMinutes;
+  } else if (timeEndMinutes != 0) {
+    gcd = timeEndMinutes;
+  }
+  return gcd;
 }
