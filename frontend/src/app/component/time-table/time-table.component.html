@@ -1,1 +1,56 @@
-<p>time-table works!</p>
+<div class="body-div">
+  <div id="week-container" class="week-container">
+    <div id="week-blocks" class="week-blocks">
+      <div class="week-block {{selectedWeekNumber == weekNumber ? 'active': ''}}"
+           *ngFor="let weekNumber of createRange(totalWeeks)" (click)="changeWeekTo(weekNumber)">
+        {{ weekNumber }}
+      </div>
+    </div>
+  </div>
+  <div (onResize)="onResize($event)" id="timetable" class="timetable">
+    <div class="time-column" [style.grid-template-rows]="this.getColumnTemplateRows()">
+      <div></div>
+      <div class="time-cell" *ngFor="let time of this.timeStrings">
+        <div class="time-text">{{ time }}</div>
+      </div>
+    </div>
+    <div class="day-column" *ngFor="let day of grid" [style.grid-template-rows]="this.getColumnTemplateRows()">
+      <div class="header-cell">
+        {{ day.date.toLocaleDateString('en-EN', {weekday: 'long', day: 'numeric', month: 'long'}) }}
+      </div>
+      <ng-container *ngFor="let time of day.times">
+        <div class="cell" [style.grid-row]="time.getSpan()">
+          <ng-container *ngIf="time.timeTableCells.length > 1">
+            <div class="multiple-classes-div">
+              <div class="toggle-buttons">
+                <div class="toggle-button {{timeTableCell.displayed ? 'toggle-button-clicked': ''}}"
+                     *ngFor="let timeTableCell of time.timeTableCells; index as i" (click)="time.displayTimeTableCell(timeTableCell)">{{i + 1}}</div>
+              </div>
+              <div class="multiple-classes-container">
+                <div class="multiple-classes-grid"  [style.grid-template-rows]="getTemplateRows(time)">
+                  <ng-container *ngFor="let timeTableCell of time.timeTableCells">
+                    <ng-container *ngFor="let displayBoolean of timeTableCell.displayBooleans">
+                      <div class="place-holder-cell" *ngIf="timeTableCell.displayed && !displayBoolean"></div>
+                      <div class="cell" [style.grid-row]="timeTableCell.getSpan()" *ngIf="timeTableCell.displayed && displayBoolean">
+                        <app-subject-wrapper-element
+                          [timeTableCell]="timeTableCell">
+                        </app-subject-wrapper-element>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="time.timeTableCells.length == 1">
+            <ng-container *ngFor="let timeTableCell of time.timeTableCells">
+              <app-subject-wrapper-element
+                [timeTableCell]="timeTableCell">
+              </app-subject-wrapper-element>
+            </ng-container>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -5,4 +5,9 @@
       [justification]="justification">
     </app-justification>
   </div>
+  <div class="empty-elements-body-div" *ngIf="justifications.length == 0">
+    <div class="empty-elements-div">
+      <span>There are no justifications to Approve / Reject</span>
+    </div>
+  </div>
 </div>

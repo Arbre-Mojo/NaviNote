@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
@@ -17,4 +18,10 @@ public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
 
     @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId AND p.minutesLate > 0")
     List<TimeTable> getDelaysByStudentId(Integer studentId);
+
+    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId")
+    List<TimeTable> getTimeTablesByStudentId(Integer studentId);
+
+    @Query("SELECT p FROM TimeTable p WHERE p.courseId = :courseId")
+    List<TimeTable> getTimeTablesByCourseId(Integer courseId);
 }

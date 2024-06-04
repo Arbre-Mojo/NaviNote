@@ -8,7 +8,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {adminCategory} from "../../../service/user/userCategories";
 import {JustificationComponent} from "./justification/justification.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Justification} from "../../../model/justification";
 import {JustificationService} from "../../../service/justification.service";
 import {Student} from "../../../model/user/student";
@@ -19,7 +19,8 @@ import {JustificationImageService} from "../../../service/justification-image.se
   standalone: true,
   imports: [
     JustificationComponent,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './manage-justifications.component.html',
   styleUrl: './manage-justifications.component.scss'

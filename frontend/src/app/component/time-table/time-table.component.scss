@@ -1,0 +1,167 @@
+@import '../common.scss';
+
+.timetable-container {
+  width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.week-selector {
+  display: none;
+}
+
+#week-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.week-blocks {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: 2px;
+  width: 100%;
+}
+
+.week-block {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #938c8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.week-block.active {
+  background-color: $colorP11;
+  color: #fff;
+}
+
+.timetable {
+  display: grid;
+  grid-template-columns: auto repeat(5, 1fr);
+  gap: 1px;
+  border-collapse: collapse;
+
+  height: 100%;
+}
+
+.time-column, .day-column {
+  display: grid;
+  //grid-template-rows: 50px repeat(11, 70px);
+}
+
+.header-cell {
+  background-color: $colorP11;
+  color: #fff;
+  border: 1px solid #938c8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.time-cell {
+  background-color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.time-text {
+  position: relative;
+  top: -10px;
+}
+
+.cell {
+  border: 1px solid #938c8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+
+  width: 100%;
+  height: 100%;
+}
+
+.place-holder-cell {
+  background-color: $colorP17;
+  width: 100%;
+}
+
+.multiple-classes-div {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+
+  height: 100%;
+  width: 100%;
+
+  padding: 0 0 0 3px;
+}
+
+.toggle-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.multiple-classes-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  flex-grow: 1;
+
+  border-left: solid 1px $colorP20;
+}
+
+.multiple-classes-grid {
+  display: grid;
+  width: 100%;
+}
+
+.toggle-button, .toggle-button-clicked {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $colorP11;
+  color: white;
+  border: solid 1px $colorP11;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+
+  width: 15px;
+}
+
+.toggle-button:hover, .toggle-button-clicked {
+  background-color: white;
+  color: $colorP11;
+}
+

@@ -38,7 +38,7 @@ public class Message {
     @Column(name = "admin_id", nullable = false)
     private Integer adminId;
 
-    @JoinColumn(name = "conversation_id", nullable = false)
+    @Column(name = "conversation_id", nullable = false)
     private Integer conversationId;
 
     @Transient
