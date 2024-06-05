@@ -1,14 +1,11 @@
 package arbremojo.backend.controller;
 
 import arbremojo.backend.model.TimeTable;
+import arbremojo.backend.model.query.select.ByCourseBody;
 import arbremojo.backend.service.TimeTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +36,10 @@ public class TimeTableController extends EntityController<TimeTable, TimeTableSe
     @GetMapping("/get-time-tables-by-professor-id/{professorId}")
     public ResponseEntity<List<TimeTable>> getTimeTablesByProfessorId(@PathVariable("professorId") Integer professorId) {
         return ResponseEntity.ok(entityService.getTimeTablesByProfessorId(professorId));
+    }
+
+    @PostMapping("/get-time-tables-by-course-name-and-interval")
+    public ResponseEntity<List<TimeTable>> getTimeTablesByCourseNameAndInterval(@RequestBody ByCourseBody byCourseBody) {
+        return ResponseEntity.ok(entityService.getTimeTablesByCourseNameAndInterval(byCourseBody));
     }
 }

@@ -1,5 +1,6 @@
 package arbremojo.backend.service;
 
+import arbremojo.backend.model.Course;
 import arbremojo.backend.model.CourseList;
 import arbremojo.backend.repository.CourseListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class CourseListService extends EntityService<CourseList, CourseListRepos
 
     public List<CourseList> getCourseListsByProfessorId(Integer professorId) {
         return entityRepository.getCourseListsByProfessorId(professorId);
+    }
+
+    public List<Course> getCoursesByCourseNameAndProfessorId(Integer professorId, String courseName) {
+        return entityRepository.getCoursesByCourseNameAndProfessorId(professorId, courseName.toLowerCase());
     }
 }

@@ -73,6 +73,11 @@ export function getCurrentTimeStamp(): string {
   return new Date().toISOString();
 }
 
+export function getSqlTimeStamp(date: Date): string {
+  date.setTime(date.getTime() - (date.getTimezoneOffset() * 60000));
+  return date.toISOString().replace('T', ' ').replace('Z', '');
+}
+
 export function createRange(number: number) {
   return new Array(number).fill(0)
     .map((n, index) => index + 1);

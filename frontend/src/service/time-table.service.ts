@@ -3,6 +3,7 @@ import {EntityService} from "./entity.service";
 import {TimeTable} from "../model/time-table";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
+import {ByCourseBody} from "../model/query/select/by-course-name-and-interval";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,11 @@ export class TimeTableService extends EntityService<TimeTable> {
     return this.http.get<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-time-tables-by-student-id/${studentId}`);
   }
 
-  getTimeTablesByProfessorId(professorId: number) {
+  public getTimeTablesByProfessorId(professorId: number) {
     return this.http.get<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-time-tables-by-professor-id/${professorId}`);
+  }
+
+  public getTimeTablesByCourseNameAndInterval(byCourseNameAndInterval: ByCourseBody) {
+    return this.http.post<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-time-tables-by-course-name-and-interval`, byCourseNameAndInterval);
   }
 }

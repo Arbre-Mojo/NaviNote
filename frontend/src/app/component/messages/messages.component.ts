@@ -252,7 +252,9 @@ export class MessagesComponent extends CookieComponent implements OnInit {
             this.conversationService.findEntityById(jsonConversation.conversationId!).subscribe({
               next: (jsonConversation: Conversation) => {
                 this.conversations.push(Conversation.fromJson(jsonConversation));
-                this.conversationElements.push(new ConversationElement(Conversation.fromJson(jsonConversation)));
+                let conversationElement = new ConversationElement(Conversation.fromJson(jsonConversation));
+                this.conversationElements.push(conversationElement);
+                this.onConversationElementClick(conversationElement);
               },
               error: (error: HttpErrorResponse) => {
                 console.log(error);
@@ -263,6 +265,14 @@ export class MessagesComponent extends CookieComponent implements OnInit {
             console.log(error);
           }
         });
+      } else {
+        let conversationElement = this.conversationElements.find(conversationElement =>
+          conversationElement.conversation?.conversationId == conversation?.conversationId);
+        if(conversationElement != undefined) {
+          this.onConversationElementClick(conversationElement);
+        } else {
+          console.log("Error: conversationElement is undefined");
+        }
       }
     }
   }

@@ -12,6 +12,7 @@ import {UserSettingsComponent} from "./component/user-account/user-settings/user
 import {MessagesComponent} from "./component/messages/messages.component";
 import {AbsencesAndTardinessComponent} from "./component/absences-and-tardiness/absences-and-tardiness.component";
 import {ManageJustificationsComponent} from "./component/manage-justifications/manage-justifications.component";
+import {StudentListComponent} from "./component/student-list/student-list.component";
 
 export let routes: Routes;
 routes = [
@@ -23,6 +24,7 @@ routes = [
   {path: 'absences-and-tardiness', component: AbsencesAndTardinessComponent},
   {path: 'manage-justifications', component: ManageJustificationsComponent},
   {path: 'time-table', component: TimeTableComponent},
+  {path: 'student-list', component: StudentListComponent},
   {path: 'messages', component: MessagesComponent},
   {
     path: 'user-account', component: UserAccountComponent, children: [

@@ -1,5 +1,6 @@
 import {Course} from "./course";
 import {Justification} from "./justification";
+import {getDateString, getTimeString} from "../app/component/misc/functions";
 
 export class TimeTable {
   timeTableId: number | undefined;
@@ -47,5 +48,13 @@ export class TimeTable {
       }
     }
     return timeTables;
+  }
+
+  toString(): string {
+    let timeStartDate = new Date(this.timeStart);
+    let timeEndDate = new Date(this.timeEnd);
+
+    return `${this.course?.courseName} - ${getDateString(timeStartDate)} - From ${getTimeString(timeStartDate)} to ${getTimeString(timeEndDate)}`;
+
   }
 }

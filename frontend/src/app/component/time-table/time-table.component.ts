@@ -156,13 +156,9 @@ export class TimeTableComponent extends CookieComponent implements OnInit {
           }
           let gcd = Math.min(getDateGcd(timeStartDate.getMinutes(), minMinutes), getDateGcd(timeEndDate.getMinutes(), minMinutes));
           minGcd = Math.min(minGcd, gcd);
-          console.log(minMinutes)
-          console.log(minGcd)
-          console.log("--------------")
         });
 
         time.timeTableCells.forEach(timeTableCell => {
-          console.log(minGcd)
 
           let timeTable = timeTableCell.timeTable;
           let timeStartDate = new Date(timeTable.timeStart);
@@ -189,7 +185,6 @@ export class TimeTableComponent extends CookieComponent implements OnInit {
 
       });
       this.timeStrings.sort((a, b) => a.localeCompare(b));
-      console.log(this.timeStrings)
     }
 
     this.grid = [];

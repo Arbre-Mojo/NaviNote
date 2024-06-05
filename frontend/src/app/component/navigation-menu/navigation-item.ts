@@ -1,6 +1,12 @@
-import {faBook, faCalendar, faClock, faMessage} from "@fortawesome/free-solid-svg-icons";
+import {faBook, faCalendar, faClock, faList, faMessage} from "@fortawesome/free-solid-svg-icons";
 import {IconDefinition} from "@fortawesome/fontawesome-svg-core";
-import {adminCategory, studentCategory, userCategories, UserCategory} from "../../../service/user/userCategories";
+import {
+  adminCategory,
+  professorCategory,
+  studentCategory,
+  userCategories,
+  UserCategory
+} from "../../../service/user/userCategories";
 
 export class NavigationItem {
   constructor(private name: string, private link: string, private faIcon: IconDefinition, private allowedUserCategories: UserCategory[] = userCategories) {
@@ -26,11 +32,13 @@ export class NavigationItem {
 export const absencesAndTardinessNavigationItem = new NavigationItem("Absences And Tardiness", "/absences-and-tardiness", faClock, [studentCategory]);
 export const manageJustificationsNavigationItem = new NavigationItem("Manage Justifications", "/manage-justifications", faBook, [adminCategory]);
 export const timeTableNavigationItem = new NavigationItem("Time Table", "/time-table", faCalendar);
+export const studentListNavigationItem = new NavigationItem("Student List", "/student-list", faList, [professorCategory, adminCategory]);
 export const messagesNavigationItem = new NavigationItem("Messages", "/messages", faMessage);
 
 export const navigationItems = [
   absencesAndTardinessNavigationItem,
   manageJustificationsNavigationItem,
   timeTableNavigationItem,
+  studentListNavigationItem,
   messagesNavigationItem,
 ];

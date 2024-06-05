@@ -654,15 +654,11 @@ $hoverBackground: rgba(0, 0, 0, 0.3);
   flex-wrap: wrap;
 
   width: 100%;
+  white-space: nowrap;
 }
 
-.filter-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-
-  padding: 0 10px 0 0;
+.search-div span {
+  padding: 0 10px 0 10px;
 }
 
 .select-div {
@@ -675,14 +671,17 @@ $hoverBackground: rgba(0, 0, 0, 0.3);
   min-width: 300px;
 }
 
-.input-div {
+.input-div, .filter-div {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
 
-  flex-grow: 1;
   padding: 0 10px 0 10px;
+}
+
+.input-div {
+  flex-grow: 1;
 }
 
 // COMMON ELEMENTS

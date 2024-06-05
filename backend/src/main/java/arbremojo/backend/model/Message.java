@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.security.Timestamp;
 import java.util.Date;
 
 @Entity
