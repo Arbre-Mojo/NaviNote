@@ -1,1 +1,66 @@
 @import '../common.scss';
+
+.table-body {
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.table-container {
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: #4c865c;
+  color: #fff;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5); / Increase size of checkbox */
+margin-right: 10px;
+}
+
+input[type="number"] {
+  transform: scale(1.2);
+  margin-right: 10px;
+}
+
+td.retard {
+  display: flex;
+  align-items: center;
+}
+
+.retard-input {
+  width: 60px;
+  margin-right: 5px;
+}
+
+.label-minutes {
+  margin-left: 5px;
+}
