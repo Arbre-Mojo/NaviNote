@@ -4,6 +4,7 @@ import {getDateString, getTimeString} from "../../misc/functions";
 import {AttendanceService} from "../../../../service/misc/attendance.service";
 import {CookieComponent} from "../../misc/cookie-component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-subject-wrapper-element',
@@ -20,6 +21,7 @@ export class SubjectWrapperElementComponent extends CookieComponent implements O
 
   constructor(private el: ElementRef,
               private attendanceService: AttendanceService,
+              protected override cookieService: CookieService,
               protected override router: Router, protected override route: ActivatedRoute) {
     super();
   }
