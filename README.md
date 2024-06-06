@@ -17,7 +17,7 @@ Assurez-vous d'avoir les éléments suivants installés sur votre machine :
 Si Node.js n'est pas déjà installé sur votre machine, installez-le en utilisant le gestionnaire de paquets approprié pour votre système d'exploitation.
 
 
-## Étape 2 : Installation npm
+## Étape 2 : Installation des dépendances du projet avec npm
 
 npm install est utilisé pour installer toutes les dépendances nécessaires définies dans le fichier package.json de votre projet Angular. Cela prépare votre environnement de développement en téléchargeant tous les modules nécessaires.
 
@@ -71,6 +71,6 @@ Insérez les données dans la base de données à l'aide du fichier insert.sql e
 
 
 
-### Conclusion
+# Conclusion
 
 Vous avez maintenant tous les éléments nécessaires pour naviguer sur notre site. Bon surfing !
