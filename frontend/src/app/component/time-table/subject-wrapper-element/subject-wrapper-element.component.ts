@@ -33,7 +33,9 @@ export class SubjectWrapperElementComponent extends CookieComponent implements O
   }
 
   onClick() {
-    this.attendanceService.timeTable = this.timeTableCell.timeTable;
-    this.routeTo('/attendance');
+    if(this.isProfessorCategory() || this.isAdminCategory()) {
+      this.attendanceService.timeTable = this.timeTableCell.timeTable;
+      this.routeTo('/attendance');
+    }
   }
 }
