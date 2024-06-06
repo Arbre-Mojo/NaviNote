@@ -17,8 +17,6 @@ import {
   faClock,
   faPersonRunning,
 } from "@fortawesome/free-solid-svg-icons";
-import {TimeTable} from "../../../model/time-table";
-import {TimeTableService} from "../../../service/time-table.service";
 import {getDateTime, getDateTimeDifference, getFormattedTime} from "../misc/functions";
 import {AddJustificationModalComponent} from "../add-justification-modal/add-justification-modal.component";
 import {Justification} from "../../../model/justification";
@@ -26,6 +24,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProfessorService} from "../../../service/user/professor.service";
 import {AdminService} from "../../../service/user/admin.service";
 import {JustificationService} from "../../../service/justification.service";
+import {StudentListService} from "../../../service/student-list.service";
+import {StudentList} from "../../../model/student-list";
 
 @Component({
   selector: 'app-absences-and-tardiness',
@@ -49,11 +49,11 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
   navigationItems = navigationItems;
   faCalculator = faCalculator;
 
-  selectedTimeTables: TimeTable[] = [];
+  selectedStudentLists: StudentList[] = [];
   selectedNavigationItem: NavigationItem = absencesNavigationItem;
 
   newJustification!: Justification;
-  selectedTimeTable!: TimeTable;
+  selectedStudentList!: StudentList;
 
   protected readonly getDateTime = getDateTime;
   protected readonly getDateTimeDifference = getDateTimeDifference;
@@ -65,7 +65,7 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
   isJustificationModalOpen: boolean = false;
 
   constructor(protected override currentUserService: CurrentUserService,
-              protected override timeTableService: TimeTableService,
+              protected override studentListService: StudentListService,
               protected override studentService: StudentService,
               protected override adminService: AdminService,
               protected override professorService: ProfessorService,
@@ -85,20 +85,20 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
   navigationItemOnClick(navigationItem: NavigationItem) {
     this.selectedNavigationItem = navigationItem;
     if(navigationItem === absencesNavigationItem) {
-      this.timeTableService.getAbsencesByStudentId(this.currentUserService.user?.getUserId()!).subscribe({
-        next: (absences: TimeTable[]) => {
-          this.selectedTimeTables = TimeTable.initializeTimeTables(absences);
-          this.getJustifications(this.selectedTimeTables).then();
+      this.studentListService.getAbsencesByStudentId(this.currentUserService.user?.getUserId()!).subscribe({
+        next: (absences: StudentList[]) => {
+          this.selectedStudentLists = StudentList.initializeStudentLists(absences);
+          this.getJustifications(this.selectedStudentLists).then();
         },
         error: (error) => {
           console.error(error);
         }
       });
     } else if (navigationItem === tardinessNavigationItem) {
-      this.timeTableService.getDelaysByStudentId(this.currentUserService.user?.getUserId()!).subscribe({
-        next: (delays: TimeTable[]) => {
-          this.selectedTimeTables = TimeTable.initializeTimeTables(delays);
-          this.getJustifications(this.selectedTimeTables).then();
+      this.studentListService.getDelaysByStudentId(this.currentUserService.user?.getUserId()!).subscribe({
+        next: (delays: StudentList[]) => {
+          this.selectedStudentLists = StudentList.initializeStudentLists(delays);
+          this.getJustifications(this.selectedStudentLists).then();
         },
         error: (error) => {
           console.error(error);
@@ -121,9 +121,9 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
     return `${hours}${time.minutes} Minutes`;
   }
 
-  onOpenModal(timeTable: TimeTable) {
-    this.newJustification = new Justification("", timeTable.timeTableId!, this.currentUserService.user?.getUserId()!, false);
-    this.selectedTimeTable = timeTable;
+  onOpenModal(studentList: StudentList) {
+    this.newJustification = new Justification("", studentList.studentListId!, this.currentUserService.user?.getUserId()!, false);
+    this.selectedStudentList = studentList;
     this.isJustificationModalOpen = true;
   }
 
@@ -131,13 +131,13 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
     this.isJustificationModalOpen = false;
   }
 
-  hasJustification(timeTable: TimeTable) {
-    return timeTable.justification != undefined
+  hasJustification(studentList: StudentList) {
+    return studentList.justification != undefined
   }
 
-  isJustificationAccepted(timeTable: TimeTable) {
-    if(timeTable.justification != undefined) {
-      return timeTable.justification?.accepted;
+  isJustificationAccepted(studentList: StudentList) {
+    if(studentList.justification != undefined) {
+      return studentList.justification?.accepted;
     } else {
       return false;
     }
@@ -148,25 +148,25 @@ export class AbsencesAndTardinessComponent extends CookieComponent implements On
     let justifiedTimeMins = 0;
     let unjustifiedTimeMins = 0;
 
-    this.selectedTimeTables.forEach((timeTable: TimeTable) => {
-      if(timeTable.justification == undefined) {
-        if(timeTable.absent) {
-          toJustifyTimeMins += (new Date(timeTable.timeEnd).getTime() - new Date(timeTable.timeStart).getTime()) / 60000;
-        } else if(timeTable.minutesLate > 0) {
-          toJustifyTimeMins += timeTable.minutesLate;
+    this.selectedStudentLists.forEach((studentList: StudentList) => {
+      if(studentList.justification == undefined) {
+        if(studentList.absent) {
+          toJustifyTimeMins += (new Date(studentList.timeTable?.timeEnd!).getTime() - new Date(studentList.timeTable?.timeStart!).getTime()) / 60000;
+        } else if(studentList.minutesLate > 0) {
+          toJustifyTimeMins += studentList.minutesLate;
         }
       } else {
-        if(timeTable.justification.accepted) {
-          if(timeTable.absent) {
-            justifiedTimeMins += (new Date(timeTable.timeEnd).getTime() - new Date(timeTable.timeStart).getTime()) / 60000;
-          } else if(timeTable.minutesLate > 0) {
-            justifiedTimeMins += timeTable.minutesLate;
+        if(studentList.justification.accepted) {
+          if(studentList.absent) {
+            justifiedTimeMins += (new Date(studentList.timeTable?.timeEnd!).getTime() - new Date(studentList.timeTable?.timeStart!).getTime()) / 60000;
+          } else if(studentList.minutesLate > 0) {
+            justifiedTimeMins += studentList.minutesLate;
           }
         } else {
-          if(timeTable.absent) {
-            unjustifiedTimeMins += (new Date(timeTable.timeEnd).getTime() - new Date(timeTable.timeStart).getTime()) / 60000;
-          } else if(timeTable.minutesLate > 0) {
-            unjustifiedTimeMins += timeTable.minutesLate;
+          if(studentList.absent) {
+            unjustifiedTimeMins += (new Date(studentList.timeTable?.timeEnd!).getTime() - new Date(studentList.timeTable?.timeStart!).getTime()) / 60000;
+          } else if(studentList.minutesLate > 0) {
+            unjustifiedTimeMins += studentList.minutesLate;
           }
         }
       }

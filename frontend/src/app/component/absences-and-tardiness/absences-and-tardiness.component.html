@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="details-container-body" *ngFor="let timeTable of selectedTimeTables">
+    <div class="details-container-body" *ngFor="let studentList of selectedStudentLists">
       <div class="details-container">
         <div class="top-container">
           <div class="side-container">
@@ -48,40 +48,40 @@
             <div class="info-div">
               <span>From</span>
               <div class="separation-line-small"></div>
-              <span>{{ getDateTime(timeTable.timeStart) }}</span>
+              <span>{{ getDateTime(studentList.timeTable?.timeStart!) }}</span>
             </div>
             <div class="info-div">
               <span>To</span>
               <div class="separation-line-small"></div>
-              <span>{{ getDateTime(timeTable.timeEnd) }}</span>
+              <span>{{ getDateTime(studentList.timeTable?.timeEnd!) }}</span>
             </div>
             <div class="info-div">
               <span>Length</span>
               <div class="separation-line-small"></div>
               <span
-                *ngIf="selectedNavigationItem === absencesNavigationItem">{{ getTimeDiff(timeTable.timeStart, timeTable.timeEnd) }}</span>
+                *ngIf="selectedNavigationItem === absencesNavigationItem">{{ getTimeDiff(studentList.timeTable?.timeStart!, studentList.timeTable?.timeEnd!) }}</span>
               <span
-                *ngIf="selectedNavigationItem === tardinessNavigationItem">{{ getTime(timeTable.minutesLate) }}</span>
+                *ngIf="selectedNavigationItem === tardinessNavigationItem">{{ getTime(studentList.minutesLate) }}</span>
             </div>
             <div class="info-div">
               <span>Class</span>
               <div class="separation-line-small"></div>
-              <span>{{ timeTable.course?.courseName }}</span>
+              <span>{{ studentList.timeTable?.course?.courseName }}</span>
             </div>
             <div class="info-div">
               <span>Justification Sent</span>
               <div class="separation-line-small"></div>
-              <span>{{ hasJustification(timeTable) ? 'True' : 'False' }}</span>
+              <span>{{ hasJustification(studentList) ? 'True' : 'False' }}</span>
             </div>
             <div class="info-div">
               <span>Justification Accepted</span>
               <div class="separation-line-small"></div>
-              <span>{{ isJustificationAccepted(timeTable) ? 'True' : 'False' }}</span>
+              <span>{{ isJustificationAccepted(studentList) ? 'True' : 'False' }}</span>
             </div>
           </div>
         </div>
-        <div class="button-div" *ngIf="!hasJustification(timeTable)">
-          <button class="default-btn" (click)="onOpenModal(timeTable)">Justify</button>
+        <div class="button-div" *ngIf="!hasJustification(studentList)">
+          <button class="default-btn" (click)="onOpenModal(studentList)">Justify</button>
         </div>
       </div>
     </div>
@@ -90,6 +90,6 @@
 <app-add-justification-modal
   [isModalOpen]="isJustificationModalOpen"
   [justification]="newJustification"
-  [selectedTimeTable]="selectedTimeTable"
+  [selectedStudentList]="selectedStudentList"
   (onModalChangeEmitter)="onCloseModal()">
 </app-add-justification-modal>

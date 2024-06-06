@@ -34,19 +34,8 @@ public class TimeTable {
     @Column(name = "campus")
     private String campus;
 
-    @Column(name = "absent")
-    @ColumnDefault("false")
-    private boolean absent;
-
-    @Column(name = "minutes_late")
-    @ColumnDefault("0")
-    private int minutesLate;
-
     @Column(name = "course_id", nullable = false)
     private Integer courseId;
-
-    @JoinColumn(name = "student_id", nullable = false)
-    private Integer studentId;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Course.class)
     @JoinColumn(name = "course_id", insertable = false, updatable = false)

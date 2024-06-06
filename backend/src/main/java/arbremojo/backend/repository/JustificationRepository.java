@@ -10,6 +10,6 @@ public interface JustificationRepository extends JpaRepository<Justification, In
     @Query("DELETE FROM Justification p WHERE p.justificationId = :id")
     Integer deleteEntityById(Integer id);
 
-    @Query("SELECT p FROM Justification p WHERE p.timeTableId = :timeTableId")
-    Justification findJustificationByTimeTableId(Integer timeTableId);
+    @Query("SELECT p FROM Justification p WHERE p.studentListId = :studentListId")
+    Justification findJustificationByStudentListId(Integer studentListId);
 }

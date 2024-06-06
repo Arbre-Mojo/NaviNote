@@ -26,6 +26,8 @@ import {JustificationImageService} from "../../../service/justification-image.se
 import {Justification} from "../../../model/justification";
 import {JustificationImage} from "../../../model/justification-image";
 import {TimeTable} from "../../../model/time-table";
+import {StudentListService} from "../../../service/student-list.service";
+import {StudentList} from "../../../model/student-list";
 
 export abstract class CookieComponent {
   // Services
@@ -39,6 +41,7 @@ export abstract class CookieComponent {
   protected messageService!: MessageService;
   protected conversationService!: ConversationService
   protected timeTableService!: TimeTableService;
+  protected studentListService!: StudentListService;
   protected justificationService!: JustificationService;
   protected justificationImageService!: JustificationImageService;
 
@@ -427,19 +430,19 @@ export abstract class CookieComponent {
       {type: `${httpEvent.headers.get('Content-Type')};charset=utf-8`});
   }
 
-  getJustifications(timeTables: TimeTable[]) {
+  getJustifications(studentLists: StudentList[]) {
     return new Promise<boolean>((resolve, reject) => {
       let count = 0;
 
       new Observable<number>((observer) => {
-        for (let justification of timeTables) {
-          this.getJustification(justification).then(() => {
+        for (let studentList of studentLists) {
+          this.getJustification(studentList).then(() => {
             observer.next(++count);
           });
         }
       }).subscribe({
         next: (count: number) => {
-          if (count == timeTables.length) {
+          if (count == studentLists.length) {
             resolve(true);
           }
         }
@@ -447,11 +450,11 @@ export abstract class CookieComponent {
     });
   }
 
-  getJustification(timeTable: TimeTable) {
+  getJustification(studentList: StudentList) {
     return new Promise<boolean>((resolve, reject) => {
-      this.justificationService.findJustificationByTimeTableId(timeTable?.timeTableId!).subscribe({
+      this.justificationService.findJustificationByStudentListId(studentList?.timeTableId!).subscribe({
         next: (jsonJustification: Justification) => {
-          if (jsonJustification != null) timeTable.justification = Justification.fromJson(jsonJustification);
+          if (jsonJustification != null) studentList.justification = Justification.fromJson(jsonJustification);
           resolve(true);
         },
         error: (error: HttpErrorResponse) => {

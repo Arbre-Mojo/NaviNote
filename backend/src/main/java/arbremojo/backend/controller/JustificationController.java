@@ -17,8 +17,8 @@ public class JustificationController extends EntityController<Justification, Jus
         super(entityService, Justification.class);
     }
 
-    @GetMapping("/find-justification-by-time-table-id/{timeTableId}")
-    public Justification findJustificationByTimeTableId(@PathVariable Integer timeTableId) {
-        return entityService.findJustificationByTimeTableId(timeTableId);
+    @GetMapping("/find-justification-by-student-list-id/{studentListId}")
+    public Justification findJustificationByStudentListId(@PathVariable Integer studentListId) {
+        return entityService.findJustificationByStudentListId(studentListId);
     }
 }

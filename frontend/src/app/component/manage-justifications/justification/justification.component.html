@@ -33,17 +33,17 @@
     <div class="info-div justification-elem">
       <span class="text-font-700">Course</span>
       <div class="separation-line-small"></div>
-      <span>{{ justification.timeTable?.course?.courseName }}</span>
+      <span>{{ justification.studentList?.timeTable?.course?.courseName }}</span>
     </div>
     <div class="info-div justification-elem">
       <span>From</span>
       <div class="separation-line-small"></div>
-      <span>{{ getDateTime(justification.timeTable?.timeStart!) }}</span>
+      <span>{{ getDateTime(justification.studentList?.timeTable?.timeStart!) }}</span>
     </div>
     <div class="info-div justification-elem">
       <span>To</span>
       <div class="separation-line-small"></div>
-      <span>{{ getDateTime(justification.timeTable?.timeEnd!) }}</span>
+      <span>{{ getDateTime(justification.studentList?.timeTable?.timeEnd!) }}</span>
     </div>
     <div class="info-div justification-elem">
       <span>Justification Accepted</span>
@@ -51,8 +51,8 @@
       <span>{{getJustificationAccepted()}}</span>
     </div>
     <div class="info-div justification-elem-2">
-      <button class="allow-button" (click)="updateJustification(true)">Accept</button>
-      <button class="deny-button" (click)="updateJustification(false)">Reject</button>
+      <button class="allow-button" (click)="updateJustification(true)" *ngIf="!canBeAccepted(false)">Accept</button>
+      <button class="deny-button" (click)="updateJustification(false)" *ngIf="canBeAccepted(true)">Reject</button>
     </div>
   </div>
 </div>

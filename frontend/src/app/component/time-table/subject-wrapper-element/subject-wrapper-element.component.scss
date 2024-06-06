@@ -9,6 +9,15 @@
   width: 100%;
 }
 
-.subject {
+.subject-info {
+  cursor: default;
+}
+
+.subject-header {
   color: $colorP11;
+  cursor: pointer;
+}
+
+.subject-header:hover {
+  text-decoration: underline $colorP11;
 }

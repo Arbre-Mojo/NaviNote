@@ -1,6 +1,10 @@
 @import '../common.scss';
 
 .table-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
@@ -63,4 +67,11 @@ td.retard {
 
 .label-minutes {
   margin-left: 5px;
+}
+
+.bottom-button-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

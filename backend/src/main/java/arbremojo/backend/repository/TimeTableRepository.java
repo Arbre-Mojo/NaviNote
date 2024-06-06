@@ -15,13 +15,7 @@ public interface TimeTableRepository extends JpaRepository<TimeTable, Integer> {
     @Query("DELETE FROM TimeTable p WHERE p.timeTableId = :id")
     Integer deleteEntityById(Integer id);
 
-    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId AND p.absent = true")
-    List<TimeTable> getAbsencesByStudentId(Integer studentId);
-
-    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId AND p.minutesLate > 0")
-    List<TimeTable> getDelaysByStudentId(Integer studentId);
-
-    @Query("SELECT p FROM TimeTable p WHERE p.studentId = :studentId")
+    @Query("SELECT t FROM TimeTable t INNER JOIN StudentList sl ON t.timeTableId = sl.timeTableId WHERE sl.studentId = :studentId")
     List<TimeTable> getTimeTablesByStudentId(Integer studentId);
 
     @Query("SELECT p FROM TimeTable p WHERE p.courseId = :courseId")

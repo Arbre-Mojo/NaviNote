@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {studentListNavigationItem} from "../navigation-menu/navigation-item";
+import {attendanceNavigationItem} from "../navigation-menu/navigation-item";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {ConversationElementComponent} from "../messages/conversation-element/conversation-element.component";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
@@ -18,6 +18,10 @@ import {TimeTable} from "../../../model/time-table";
 import {TimeTableService} from "../../../service/time-table.service";
 import {ByCourseBody} from "../../../model/query/select/by-course-name-and-interval";
 import {getSqlTimeStamp} from "../misc/functions";
+import {StudentListService} from "../../../service/student-list.service";
+import {StudentList} from "../../../model/student-list";
+import {AttendanceService} from "../../../service/misc/attendance.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-student-list',
@@ -32,24 +36,29 @@ import {getSqlTimeStamp} from "../misc/functions";
     NgIf,
     ReactiveFormsModule
   ],
-  templateUrl: './student-list.component.html',
-  styleUrl: './student-list.component.scss'
+  templateUrl: './attendance.component.html',
+  styleUrl: './attendance.component.scss'
 })
-export class StudentListComponent extends CookieComponent implements OnInit {
+export class AttendanceComponent extends CookieComponent implements OnInit {
 
-  studentListNavigationItem = studentListNavigationItem;
+  attendanceNavigationItem = attendanceNavigationItem;
   timeStart!: string | undefined;
   timeEnd!: string | undefined;
 
   selectedTimetable: TimeTable | string | undefined;
   foundTimetables: TimeTable[] = [];
 
-  constructor(protected override currentUserService: CurrentUserService,
+  studentLists: StudentList[] = [];
+  attendanceRegistered: boolean = false;
+
+  constructor(private attendanceService: AttendanceService,
+              protected override currentUserService: CurrentUserService,
               protected override studentService: StudentService,
               protected override adminService: AdminService,
               protected override professorService: ProfessorService,
               protected override cookieService: CookieService,
               protected override timeTableService: TimeTableService,
+              protected override studentListService: StudentListService,
               protected override router: Router, protected override route: ActivatedRoute) {
     super();
   }
@@ -57,13 +66,27 @@ export class StudentListComponent extends CookieComponent implements OnInit {
   ngOnInit(): void {
     this.initializeUserByToken().then(() => {
       this.specificUserPage(professorCategory, adminCategory).then();
+      if(this.attendanceService.timeTable != undefined) {
+        this.selectedTimetable = this.attendanceService.timeTable;
+        this.setTimetable(this.attendanceService.timeTable.timeTableId!);
+      }
     });
   }
 
   onTimeTableSelected() {
     if (this.selectedTimetable !== undefined && typeof this.selectedTimetable !== 'string') {
-
+      this.setTimetable(this.selectedTimetable.timeTableId!);
     }
+  }
+
+  setTimetable(timeTableId: number) {
+    this.studentListService.getStudentListsByTimeTableId(timeTableId).subscribe({
+      next: (jsonStudentLists: StudentList[]) => {
+        this.studentLists = StudentList.initializeStudentLists(jsonStudentLists);
+        console.log(this.studentLists)
+      },
+      error: (error: any) => console.error(error)
+    });
   }
 
   onSubmitTimeTable(keyboardEvent: KeyboardEvent) {
@@ -89,7 +112,6 @@ export class StudentListComponent extends CookieComponent implements OnInit {
         console.log(timeStart)
         console.log(timeEnd)
 
-
         let byCourseBody = new ByCourseBody(this.selectedTimetable, getSqlTimeStamp(timeStart), getSqlTimeStamp(timeEnd));
         if (this.isProfessorCategory()) {
           byCourseBody.professorId = this.currentUserService.user?.getUserId();
@@ -103,11 +125,40 @@ export class StudentListComponent extends CookieComponent implements OnInit {
           error: (error: any) => console.error(error)
         })
       }
-
     }
   }
 
   clearFilters() {
+    this.timeStart = undefined;
+    this.timeEnd = undefined;
+    this.selectedTimetable = undefined;
+    this.foundTimetables = [];
+    this.studentLists = [];
+    this.attendanceRegistered = false;
+  }
 
+  onFinishAttendance() {
+    let count = 0;
+    new Observable<number>((observer) => {
+      for (let studentList of this.studentLists) {
+        this.studentListService.updateEntity(studentList).subscribe({
+          next: (jsonStudentList: StudentList) => {
+            observer.next(++count);
+          },
+          error: (error: any) => console.error(error)
+        });
+      }
+    }).subscribe({
+      next: (count: number) => {
+        if(count == this.studentLists.length) {
+          console.log("All student lists updated");
+          this.attendanceRegistered = true;
+        }
+      }
+    });
+  }
+
+  resetAttendanceRegistered() {
+    this.attendanceRegistered = false;
   }
 }

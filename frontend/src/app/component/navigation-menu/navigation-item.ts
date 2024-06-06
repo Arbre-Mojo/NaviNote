@@ -32,13 +32,13 @@ export class NavigationItem {
 export const absencesAndTardinessNavigationItem = new NavigationItem("Absences And Tardiness", "/absences-and-tardiness", faClock, [studentCategory]);
 export const manageJustificationsNavigationItem = new NavigationItem("Manage Justifications", "/manage-justifications", faBook, [adminCategory]);
 export const timeTableNavigationItem = new NavigationItem("Time Table", "/time-table", faCalendar);
-export const studentListNavigationItem = new NavigationItem("Student List", "/student-list", faList, [professorCategory, adminCategory]);
+export const attendanceNavigationItem = new NavigationItem("Attendance", "/attendance", faList, [professorCategory, adminCategory]);
 export const messagesNavigationItem = new NavigationItem("Messages", "/messages", faMessage);
 
 export const navigationItems = [
   absencesAndTardinessNavigationItem,
   manageJustificationsNavigationItem,
   timeTableNavigationItem,
-  studentListNavigationItem,
+  attendanceNavigationItem,
   messagesNavigationItem,
 ];

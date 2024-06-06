@@ -1,6 +1,9 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {TimeTableCell} from "../time-table.component";
 import {getDateString, getTimeString} from "../../misc/functions";
+import {AttendanceService} from "../../../../service/misc/attendance.service";
+import {CookieComponent} from "../../misc/cookie-component";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-subject-wrapper-element',
@@ -9,13 +12,16 @@ import {getDateString, getTimeString} from "../../misc/functions";
   templateUrl: './subject-wrapper-element.component.html',
   styleUrl: './subject-wrapper-element.component.scss'
 })
-export class SubjectWrapperElementComponent implements OnInit {
+export class SubjectWrapperElementComponent extends CookieComponent implements OnInit {
 
   @Input() timeTableCell!: TimeTableCell;
   timeStartString = "";
   timeEndString = "";
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,
+              private attendanceService: AttendanceService,
+              protected override router: Router, protected override route: ActivatedRoute) {
+    super();
   }
 
   ngOnInit(): void {
@@ -26,6 +32,8 @@ export class SubjectWrapperElementComponent implements OnInit {
     this.el.nativeElement.style.height = `100%`;
   }
 
-  protected readonly getTimeString = getTimeString;
-  protected readonly getDateString = getDateString;
+  onClick() {
+    this.attendanceService.timeTable = this.timeTableCell.timeTable;
+    this.routeTo('/attendance');
+  }
 }

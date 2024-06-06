@@ -12,7 +12,7 @@ export class JustificationService extends EntityService<Justification> {
     super(http, "justification");
   }
 
-  public findJustificationByTimeTableId(timeTableId: number): Observable<Justification> {
-    return this.http.get<Justification>(`${this.apiBackendUrl}/${this.entityName}/find-justification-by-time-table-id/${timeTableId}`);
+  public findJustificationByStudentListId(studentListId: number): Observable<Justification> {
+    return this.http.get<Justification>(`${this.apiBackendUrl}/${this.entityName}/find-justification-by-student-list-id/${studentListId}`);
   }
 }

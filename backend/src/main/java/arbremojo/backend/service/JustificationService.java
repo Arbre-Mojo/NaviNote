@@ -5,8 +5,6 @@ import arbremojo.backend.repository.JustificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class JustificationService extends EntityService<Justification, JustificationRepository> {
 
@@ -20,7 +18,7 @@ public class JustificationService extends EntityService<Justification, Justifica
         return entityRepository.deleteEntityById(id);
     }
 
-    public Justification findJustificationByTimeTableId(Integer absenceId) {
-        return entityRepository.findJustificationByTimeTableId(absenceId);
+    public Justification findJustificationByStudentListId(Integer studentListId) {
+        return entityRepository.findJustificationByStudentListId(studentListId);
     }
 }

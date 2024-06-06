@@ -9,11 +9,11 @@ import {Justification} from "../../../model/justification";
 import {FormsModule} from "@angular/forms";
 import {JustificationImage} from "../../../model/justification-image";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {TimeTable} from "../../../model/time-table";
 import {generateRandomString} from "../misc/functions";
 import {Observable} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UploadStatus} from "../misc/form-component";
+import {StudentList} from "../../../model/student-list";
 
 @Component({
   selector: 'app-add-justification-modal',
@@ -34,7 +34,7 @@ export class AddJustificationModalComponent extends ModalComponent {
   @ViewChild("imageInput") imageInput!: ElementRef;
 
   @Input() justification!: Justification;
-  @Input() selectedTimeTable!: TimeTable;
+  @Input() selectedStudentList!: StudentList;
 
   faCheck = faCheck;
   faTrash = faTrash;
@@ -166,7 +166,7 @@ export class AddJustificationModalComponent extends ModalComponent {
     }).subscribe({
       next: (isSuccess: boolean) => {
         if (isSuccess) {
-          this.selectedTimeTable.justification = this.justification;
+          this.selectedStudentList.justification = this.justification;
           this.closeModal();
         }
       }

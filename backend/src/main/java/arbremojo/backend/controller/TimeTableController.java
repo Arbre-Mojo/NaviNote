@@ -18,16 +18,6 @@ public class TimeTableController extends EntityController<TimeTable, TimeTableSe
         super(entityService, TimeTable.class);
     }
 
-    @GetMapping("/get-absences-by-student-id/{studentId}")
-    public ResponseEntity<List<TimeTable>> getAbsencesByStudentId(@PathVariable("studentId") Integer studentId) {
-        return ResponseEntity.ok(entityService.getAbsencesByStudentId(studentId));
-    }
-
-    @GetMapping("/get-delays-by-student-id/{studentId}")
-    public ResponseEntity<List<TimeTable>> getDelaysByStudentId(@PathVariable("studentId") Integer studentId) {
-        return ResponseEntity.ok(entityService.getDelaysByStudentId(studentId));
-    }
-
     @GetMapping("/get-time-tables-by-student-id/{studentId}")
     public ResponseEntity<List<TimeTable>> getTimeTablesByStudentId(@PathVariable("studentId") Integer studentId) {
         return ResponseEntity.ok(entityService.getTimeTablesByStudentId(studentId));

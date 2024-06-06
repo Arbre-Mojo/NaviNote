@@ -13,14 +13,6 @@ export class TimeTableService extends EntityService<TimeTable> {
     super(http, "time-table");
   }
 
-  public getAbsencesByStudentId(studentId: number): Observable<TimeTable[]> {
-    return this.http.get<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-absences-by-student-id/${studentId}`);
-  }
-
-  public getDelaysByStudentId(studentId: number): Observable<TimeTable[]> {
-    return this.http.get<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-delays-by-student-id/${studentId}`);
-  }
-
   public getTimeTablesByStudentId(studentId: number): Observable<TimeTable[]> {
     return this.http.get<TimeTable[]>(`${this.apiBackendUrl}/${this.entityName}/get-time-tables-by-student-id/${studentId}`);
   }

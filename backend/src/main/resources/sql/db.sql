@@ -1,3 +1,5 @@
+-- DEPRECATED -> SWITCHED TO DOCKER
+
 CREATE TABLE Student (
     student_id INT IDENTITY (1, 1) PRIMARY KEY,
     first_name varchar(255) NOT NULL,

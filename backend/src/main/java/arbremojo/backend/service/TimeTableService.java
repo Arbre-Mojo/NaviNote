@@ -32,14 +32,6 @@ public class TimeTableService extends EntityService<TimeTable, TimeTableReposito
         return entityRepository.deleteEntityById(id);
     }
 
-    public List<TimeTable> getAbsencesByStudentId(Integer studentId) {
-        return entityRepository.getAbsencesByStudentId(studentId);
-    }
-
-    public List<TimeTable> getDelaysByStudentId(Integer studentId) {
-        return entityRepository.getDelaysByStudentId(studentId);
-    }
-
     public List<TimeTable> getTimeTablesByStudentId(Integer studentId) {
         return entityRepository.getTimeTablesByStudentId(studentId);
     }

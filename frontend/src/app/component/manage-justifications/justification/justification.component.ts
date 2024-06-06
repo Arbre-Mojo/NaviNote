@@ -52,6 +52,7 @@ export class JustificationComponent extends CookieComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasImages = this.justification.justificationImageList.length > 0;
+    console.log(this.justification)
   }
 
   onResize(entry: ResizeObserverEntry) {
@@ -96,5 +97,13 @@ export class JustificationComponent extends CookieComponent implements OnInit {
     this.justification.justificationImageList.forEach(justificationImage => {
       this.onDownload(justificationImage);
     });
+  }
+
+  canBeAccepted(bool: boolean) {
+    if(this.justification.accepted === null) {
+      return bool;
+    } else {
+      return this.justification.accepted
+    }
   }
 }

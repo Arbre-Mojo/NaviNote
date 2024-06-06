@@ -26,8 +26,8 @@ public class Justification {
     @Column(name = "accepted")
     private Boolean accepted;
 
-    @Column(name = "time_table_id", nullable = false)
-    private Integer timeTableId;
+    @Column(name = "student_list_id", nullable = false)
+    private Integer studentListId;
 
     @Column(name = "student_id", nullable = false)
     private Integer studentId;
@@ -36,9 +36,9 @@ public class Justification {
     @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private Student student;
 
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = TimeTable.class)
-    @JoinColumn(name = "time_table_id", insertable = false, updatable = false)
-    private TimeTable timeTable;
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = StudentList.class)
+    @JoinColumn(name = "student_list_id", insertable = false, updatable = false)
+    private StudentList studentList;
 
     @OneToMany(fetch = FetchType.EAGER, targetEntity = JustificationImage.class)
     @JoinColumn(name = "justification_id", insertable = false, updatable = false)

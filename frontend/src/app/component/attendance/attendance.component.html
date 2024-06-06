@@ -1,0 +1,71 @@
+<div class="main-page-body-div">
+  <div class="header-elem">
+    <div class="header-icon-elem">
+      <fa-icon [class]="['header-icon']" [icon]="attendanceNavigationItem.getIcon()"></fa-icon>
+    </div>
+    <h1 class="main-page-h1">Attendance</h1>
+  </div>
+  <div class="separation-line-2"></div>
+  <div class="search-div">
+    <div class="input-div">
+      <span>Find By Course Name:</span>
+      <p-autoComplete name="auto-complete"
+                      [(ngModel)]="selectedTimetable"
+                      [placeholder]="'Search For A Time Table'"
+                      [inputStyleClass]="'default-input-2'"
+                      [styleClass]="'default-input-1-container'"
+                      [style.width.%]="100"
+                      [suggestions]="foundTimetables"
+                      (click)="onTimeTableSelected()"
+                      (onKeyUp)="onSubmitTimeTable($event)"/>
+    </div>
+    <div class="filter-div">
+      <input class="default-input-2" autocomplete="new-password" type="datetime-local"
+             placeholder="Time Start" [(ngModel)]="timeStart" name="search-input">
+    </div>
+    <div class="filter-div">
+      <input class="default-input-2" autocomplete="new-password" type="datetime-local"
+             placeholder="Time End" [(ngModel)]="timeEnd" name="search-input">
+    </div>
+    <div class="filter-div">
+      <button class="default-btn" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  </div>
+  <div class="table-body" *ngIf="studentLists.length > 0">
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Absent</th>
+          <th>Minutes Late</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let studentList of studentLists">
+          <td>{{ studentList.student?.getName() }}</td>
+          <td>
+            <input type="checkbox" [(ngModel)]="studentList.absent" [disabled]="studentList.minutesLate > 0"
+                   (click)="resetAttendanceRegistered()">
+          </td>
+          <td class="retard">
+            <input type="number" class="retard-input" [(ngModel)]="studentList.minutesLate"
+                   [disabled]="studentList.absent"
+                   (click)="resetAttendanceRegistered()">
+            <span class="label-minutes">minutes</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bottom-button-div">
+      <button class="default-btn" (click)="onFinishAttendance()">Finish Attendance</button>
+      <span class="validation-success-span" *ngIf="attendanceRegistered">Attendance Registered</span>
+    </div>
+  </div>
+  <div class="empty-elements-body-div" *ngIf="studentLists.length == 0">
+    <div class="empty-elements-div">
+      <span>Select A Time Table In The Filter Above</span>
+    </div>
+  </div>
+</div>

@@ -58,7 +58,9 @@ Après l'installation de Docker, assurez-vous d'entrer la commande ci-dessous po
 
 ## Étape 3 : Configuration de la Base de Données
 
-Après avoir lancé "BackendApplication" assurez-vous que la configuration de votre base de données est correctement définie dans votre fichier de configuration Spring. Les détails de la configuration doivent être :
+Après avoir lancé "BackendApplication" assurez-vous que la configuration de votre base de données est correctement définie dans votre fichier de configuration Spring.
+Toutes les données sont enregistrées dans une base de données Postgresql locale (votre machine).
+Les détails de la configuration doivent être :
 
     Nom d'utilisateur : navi_note
     Mot de passe : navi_note
@@ -67,9 +69,24 @@ Après avoir lancé "BackendApplication" assurez-vous que la configuration de vo
 
 ## Étape 4 : Insérer les Données SQL dans la Base de Données
 
-Insérez les données dans la base de données à l'aide du fichier insert.sql en exécutant celui-ci.
+Insérez les données dans la base de données à l'aide du fichier insert.sql dans le dossier src\main\ressources\sql en exécutant celui-ci.
 
+## Identifiants de connexion
 
+Pour Un Élève: 
+
+    Email: student@student.com
+    Mot de passe: Password1
+
+Pour Un Professeur:
+
+    Email: prof@prof.com
+    Mot de passe: Password1
+
+Pour Un Admin:
+
+    Email: admin@admin.com
+    Mot de passe: Password1
 
 # Conclusion
 
