@@ -57,12 +57,12 @@ export class MessagesComponent extends CookieComponent implements OnInit {
   selectedUser: User | string | undefined;
   foundUsers: User[] = [];
 
-  constructor(private el: ElementRef,
-              protected override messageService: MessageService,
-              protected override conversationService: ConversationService,
+  constructor(public el: ElementRef,
+              override messageService: MessageService,
+              override conversationService: ConversationService,
               protected override currentUserService: CurrentUserService,
               protected override adminService: AdminService,
-              protected override studentService: StudentService,
+              override studentService: StudentService,
               protected override professorService: ProfessorService,
               protected override cookieService: CookieService,
               protected override router: Router, protected override route: ActivatedRoute) {

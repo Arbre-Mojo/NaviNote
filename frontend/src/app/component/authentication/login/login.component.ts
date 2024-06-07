@@ -37,7 +37,7 @@ import {studentCategory} from "../../../../service/user/userCategories";
     }
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../auth.styles.scss', '../../main/main.component.scss']
+  styleUrls: ['./login.component.css', '../auth.styles.scss', '../../main/main.component.css']
 })
 export class LoginComponent extends AuthenticationComponent implements OnInit {
   // Form fields
@@ -54,7 +54,7 @@ export class LoginComponent extends AuthenticationComponent implements OnInit {
               protected override cookieService: CookieService,
               protected override emailService: EmailService,
               protected override currentUserService: CurrentUserService,
-              protected override router: Router, protected override route: ActivatedRoute) {
+              protected override router: Router, override route: ActivatedRoute) {
     super();
   }
 

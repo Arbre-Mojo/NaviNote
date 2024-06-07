@@ -33,7 +33,7 @@ export class ManageJustificationsComponent extends CookieComponent implements On
               protected override studentService: StudentService,
               protected override adminService: AdminService,
               protected override professorService: ProfessorService,
-              protected override justificationService: JustificationService,
+              override justificationService: JustificationService,
               protected override justificationImageService: JustificationImageService,
               protected override cookieService: CookieService,
               protected override router: Router, protected override route: ActivatedRoute) {

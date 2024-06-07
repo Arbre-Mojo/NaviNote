@@ -23,7 +23,7 @@ export class PartnerSelectionComponent extends CookieComponent {
 
   constructor(
     protected override cookieService: CookieService,
-    protected override router: Router, protected override route: ActivatedRoute) {
+    protected override router: Router, override route: ActivatedRoute) {
     super();
   }
 

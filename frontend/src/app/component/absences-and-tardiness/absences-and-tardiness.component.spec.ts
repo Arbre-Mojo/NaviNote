@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AbsencesAndTardinessComponent } from './absences-and-tardiness.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AbsencesAndTardinessComponent', () => {
   let component: AbsencesAndTardinessComponent;
@@ -8,10 +10,22 @@ describe('AbsencesAndTardinessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AbsencesAndTardinessComponent]
+      imports: [AbsencesAndTardinessComponent, HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => '123', // represents the 'id' param in route
+              },
+            },
+          },
+        },
+      ],
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AbsencesAndTardinessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

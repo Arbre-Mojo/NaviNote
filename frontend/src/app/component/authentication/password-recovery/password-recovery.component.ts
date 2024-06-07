@@ -34,7 +34,7 @@ import {Email} from "../../../../model/misc/email";
     }
   ],
   templateUrl: './password-recovery.component.html',
-  styleUrls: ['./password-recovery.component.css', '../auth.styles.scss', '../../main/main.component.scss']
+  styleUrls: ['./password-recovery.component.css', '../auth.styles.scss', '../../main/main.component.css']
 })
 export class PasswordRecoveryComponent extends AuthenticationComponent {
   // Form fields
@@ -49,7 +49,7 @@ export class PasswordRecoveryComponent extends AuthenticationComponent {
               protected override professorService: ProfessorService,
               protected override adminService: AdminService,
               protected override cookieService: CookieService,
-              protected override emailService: EmailService,
+              override emailService: EmailService,
               protected override router: Router, protected override route: ActivatedRoute) {
     super();
   }

@@ -30,7 +30,7 @@ import {ProfessorService} from "../../../../service/user/professor.service";
     RegisterElementComponent
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css', '../auth.styles.scss', '../../main/main.component.scss']
+  styleUrls: ['./register.component.css', '../auth.styles.scss', '../../main/main.component.css']
 })
 export class RegisterComponent extends CookieComponent implements OnInit {
   registrationType!: RegistrationType;

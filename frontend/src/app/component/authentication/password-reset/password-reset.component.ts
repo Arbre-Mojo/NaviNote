@@ -37,7 +37,7 @@ import {User} from "../../../../model/user/user";
     }
   ],
   templateUrl: './password-reset.component.html',
-  styleUrls: ['./password-reset.component.css', '../auth.styles.scss', '../../main/main.component.scss']
+  styleUrls: ['./password-reset.component.css', '../auth.styles.scss', '../../main/main.component.css']
 })
 export class PasswordResetComponent extends AuthenticationComponent implements OnInit {
   // Input Fields
